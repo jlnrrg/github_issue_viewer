@@ -1,16 +1,29 @@
 # github_issue_viewer
 
-A new Flutter project.
 
-## Getting Started
+## User Story
+- see a list of all issues of a Flutter GitHub repository (https://github.com/flutter/flutter)
+- be able to navigate to a detail screen of an issue that features relevant information
+- see the already visited issues distinguished at the list of all issues
+- be able to switch between dark and light modes
+- be able to sort and filter the list of issues
 
-This project is a starting point for a Flutter application.
+## Acceptance criteria
+- Issues list page
+  - Pagination with an infinitely scrolling list
+  - Filtering and sorting issues
+  - Tapping on an issue should navigate to the detail page
+  - Visited issues are distinguished from others
+- Issue detail page
+  - Display title, author, description, creation date and other relevant information in a readable manner
+- Other
+  - error handling
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Technical requirements
+- You are free in your choice of architecture and libraries
+- Your solution should be scalable and maintainable
+- Write example unit and widget tests (Nice to have: golden tests)
+- Make use of the GitHub’s GraphQL API
+- Publish your solution at GitHub
+- Build a CI on GitHub Actions for your preferred OS (Android or iOS)
+- Deploy app to Firebase App Distribution
