@@ -1,19 +1,37 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_issue_viewer/model/interface/local_safe_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPreferencesService {
+final sharedPreferencesServiceProvider =
+    Provider<LocalSafeService>((ref) => throw UnimplementedError());
+
+class SharedPreferencesService implements LocalSafeService {
   SharedPreferencesService(this.sharedPreferences);
   final SharedPreferences sharedPreferences;
 
-  static const String darkModeKey = 'darkMode';
-  static const String themeKey = 'theme';
+  static const String _themeModeKey = 'themeMode';
+  static const String _themeKey = 'theme';
+  static const String _viewedIssuesKey = 'viewedIssues';
 
-  Future<void> setDarkMode() async {
-    await sharedPreferences.setBool(darkModeKey, true);
-  }
+  @override
+  Future<void> setThemeMode(int input) =>
+      sharedPreferences.setInt(_themeModeKey, input);
 
-  Future<void> setLightMode() async {
-    await sharedPreferences.setBool(darkModeKey, false);
-  }
+  @override
+  int? getThemeMode() => sharedPreferences.getInt(_themeModeKey);
 
-  bool isDarkMode() => sharedPreferences.getBool(darkModeKey) ?? false;
+  @override
+  Future<void> setTheme(String input) =>
+      sharedPreferences.setString(_themeKey, input);
+
+  @override
+  String? getTheme() => sharedPreferences.getString(_themeKey);
+
+  @override
+  Future<void> setViewedIssues(List<String> input) =>
+      sharedPreferences.setStringList(_viewedIssuesKey, input);
+
+  @override
+  List<String> getViewedIssues() =>
+      sharedPreferences.getStringList(_viewedIssuesKey) ?? [];
 }

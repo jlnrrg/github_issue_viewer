@@ -28,6 +28,8 @@ class AppTheme with _$AppTheme {
   factory AppTheme.fromJson(Map<String, dynamic> json) =>
       _$AppThemeFromJson(json);
 
+  factory AppTheme.initial() => const AppTheme.deepBlue();
+
   static int defaultBlend(Brightness brightness) =>
       brightness == Brightness.light ? 10 : 20;
 
@@ -73,140 +75,43 @@ class AppTheme with _$AppTheme {
 
   static final List<ThemeData> dark = all.map((e) => e.toDarkTheme()).toList();
 
-  ThemeData toTheme(Brightness brightness, {String? fontFamily}) =>
-      brightness == Brightness.light
-          ? toLightTheme(fontFamily: fontFamily)
-          : toDarkTheme(fontFamily: fontFamily);
-
   ThemeData toLightTheme({String? fontFamily}) => AppTheme._modifyThemeData(
-      map(
-        deepPurple: (_) => buildLight(
-          scheme: FlexScheme.deepPurple,
-          fontFamily: fontFamily,
-        ).toTheme,
-        aquaBlue: (_) => buildLight(
-          scheme: FlexScheme.aquaBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        deepBlue: (_) => buildLight(
-          scheme: FlexScheme.deepBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        red: (_) => buildLight(
-          scheme: FlexScheme.red,
-          fontFamily: fontFamily,
-        ).toTheme,
-        bahamaBlue: (_) => buildLight(
-          scheme: FlexScheme.bahamaBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        sanJuanBlue: (_) => buildLight(
-          scheme: FlexScheme.sanJuanBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        shark: (_) => buildLight(
-          scheme: FlexScheme.shark,
-          fontFamily: fontFamily,
-        ).toTheme,
-        money: (_) => buildLight(
-          scheme: FlexScheme.money,
-          fontFamily: fontFamily,
-        ).toTheme,
-        sakura: (_) => buildLight(
-          scheme: FlexScheme.sakura,
-          fontFamily: fontFamily,
-        ).toTheme,
-        espresso: (_) => buildLight(
-          scheme: FlexScheme.espresso,
-          fontFamily: fontFamily,
-        ).toTheme,
-        greyLaw: (_) => buildLight(
-          scheme: FlexScheme.greyLaw,
-          fontFamily: fontFamily,
-        ).toTheme,
-        gold: (_) => buildLight(
-          scheme: FlexScheme.gold,
-          fontFamily: fontFamily,
-        ).toTheme,
-        material: (_) => buildLight(
-          scheme: FlexScheme.material,
-          fontFamily: fontFamily,
-        ).toTheme,
-        materialHc: (_) => buildLight(
-          scheme: FlexScheme.materialHc,
-          fontFamily: fontFamily,
-        ).toTheme,
-        green: (_) => buildLight(
-          scheme: FlexScheme.green,
-          fontFamily: fontFamily,
-        ).toTheme,
-      ),
-      Brightness.light);
+      toLightColorScheme(fontFamily: fontFamily).toTheme, Brightness.light);
 
   ThemeData toDarkTheme({String? fontFamily}) => AppTheme._modifyThemeData(
-      map(
-        deepPurple: (_) => buildDark(
-          scheme: FlexScheme.deepPurple,
-          fontFamily: fontFamily,
-        ).toTheme,
-        aquaBlue: (_) => buildDark(
-          scheme: FlexScheme.aquaBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        deepBlue: (_) => buildDark(
-          scheme: FlexScheme.deepBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        red: (_) => buildDark(
-          scheme: FlexScheme.red,
-          fontFamily: fontFamily,
-        ).toTheme,
-        bahamaBlue: (_) => buildDark(
-          scheme: FlexScheme.bahamaBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        sanJuanBlue: (_) => buildDark(
-          scheme: FlexScheme.sanJuanBlue,
-          fontFamily: fontFamily,
-        ).toTheme,
-        shark: (_) => buildDark(
-          scheme: FlexScheme.shark,
-          fontFamily: fontFamily,
-        ).toTheme,
-        money: (_) => buildDark(
-          scheme: FlexScheme.money,
-          fontFamily: fontFamily,
-        ).toTheme,
-        sakura: (_) => buildDark(
-          scheme: FlexScheme.sakura,
-          fontFamily: fontFamily,
-        ).toTheme,
-        espresso: (_) => buildDark(
-          scheme: FlexScheme.espresso,
-          fontFamily: fontFamily,
-        ).toTheme,
-        greyLaw: (_) => buildDark(
-          scheme: FlexScheme.greyLaw,
-          fontFamily: fontFamily,
-        ).toTheme,
-        gold: (_) => buildDark(
-          scheme: FlexScheme.gold,
-          fontFamily: fontFamily,
-        ).toTheme,
-        material: (_) => buildDark(
-          scheme: FlexScheme.material,
-          fontFamily: fontFamily,
-        ).toTheme,
-        materialHc: (_) => buildDark(
-          scheme: FlexScheme.materialHc,
-          fontFamily: fontFamily,
-        ).toTheme,
-        green: (_) => buildDark(
-          scheme: FlexScheme.green,
-          fontFamily: fontFamily,
-        ).toTheme,
-      ),
-      Brightness.dark);
+      toDarkColorScheme(fontFamily: fontFamily).toTheme, Brightness.dark);
+
+  FlexSchemeData toFlexSchemeData() {
+    final data = FlexColor.schemes[toFlexScheme()];
+    if (data != null) {
+      return data;
+    }
+    return FlexColor.schemes.values.first;
+  }
+
+  FlexScheme toFlexScheme() => when(
+        deepPurple: () => FlexScheme.deepPurple,
+        aquaBlue: () => FlexScheme.aquaBlue,
+        bahamaBlue: () => FlexScheme.bahamaBlue,
+        deepBlue: () => FlexScheme.deepBlue,
+        red: () => FlexScheme.red,
+        sakura: () => FlexScheme.sakura,
+        green: () => FlexScheme.green,
+        money: () => FlexScheme.money,
+        greyLaw: () => FlexScheme.greyLaw,
+        shark: () => FlexScheme.shark,
+        gold: () => FlexScheme.gold,
+        sanJuanBlue: () => FlexScheme.sanJuanBlue,
+        espresso: () => FlexScheme.espresso,
+        material: () => FlexScheme.material,
+        materialHc: () => FlexScheme.materialHc,
+      );
+
+  FlexColorScheme toLightColorScheme({String? fontFamily}) =>
+      buildLight(scheme: toFlexScheme(), fontFamily: fontFamily);
+
+  FlexColorScheme toDarkColorScheme({String? fontFamily}) =>
+      buildDark(scheme: toFlexScheme(), fontFamily: fontFamily);
 
   FlexColorScheme buildLight({FlexScheme? scheme, String? fontFamily}) {
     return FlexColorScheme.light(
