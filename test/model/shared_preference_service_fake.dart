@@ -1,6 +1,6 @@
-import 'package:github_issue_viewer/model/interface/local_safe_service.dart';
+import 'package:github_issue_viewer/model/interface/i_local_safe_service.dart';
 
-class SharedPreferencesServiceFake implements LocalSafeService {
+class SharedPreferencesServiceFake implements ILocalSafeService {
   @override
   Future<void> setThemeMode(int input) async {}
 

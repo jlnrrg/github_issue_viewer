@@ -1,0 +1,22 @@
+targets:
+  $default:
+    sources:
+      - lib/**
+      - graphql/**
+      - try/**
+    builders:
+      artemis:
+        options:
+          schema_mapping:
+            - schema: graphql/schema.docs.graphql
+              queries_glob: graphql/**/*.graphql
+              output: lib/model/service/graphql/graphql_api.dart
+              naming_scheme: pathedWithFields
+          custom_parser_import: lib/model/service/graphql/coercers.dart
+          scalar_mapping:
+            - graphql_type: Int64
+              dart_type: BigInt
+              use_custom_parser: true
+            - graphql_type: DateTime
+              dart_type: DateTime
+              use_custom_parser: true

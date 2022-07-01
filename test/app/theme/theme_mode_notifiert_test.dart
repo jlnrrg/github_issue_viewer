@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
-import 'package:github_issue_viewer/model/shared_preferences_service.dart';
+import 'package:github_issue_viewer/model/service/shared_preferences_service.dart';
 
 import '../../model/shared_preference_service_fake.dart';
 

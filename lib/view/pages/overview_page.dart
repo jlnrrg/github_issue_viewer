@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_issue_viewer/app/issues/issue_reader/issue_reader_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
@@ -24,14 +25,18 @@ class OverviewPage extends ConsumerWidget {
                 onPressed: () =>
                     context.go(context.namedLocation(MyRouter.routeNameIssue)),
                 child: const Text('To Issue')),
+            TextButton(
+                onPressed: () => ref.read(issueProvider.notifier).fetched(),
+                child: const Text('Fetch Data')),
             for (ThemeMode tm in [ThemeMode.light, ThemeMode.dark])
               Wrap(
                 children: AppTheme.all
                     .map(
                       (theme) => IntrinsicWidth(
                         child: FlexThemeModeOptionButton(
-                            backgroundColor:
-                                tm == ThemeMode.dark ? Colors.grey[850] : null,
+                            backgroundColor: tm == ThemeMode.dark
+                                ? Colors.grey[850]
+                                : Colors.white,
                             flexSchemeColor: tm == ThemeMode.dark
                                 ? theme.toFlexSchemeData().dark
                                 : theme.toFlexSchemeData().light,

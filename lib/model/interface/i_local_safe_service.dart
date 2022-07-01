@@ -1,4 +1,4 @@
-abstract class LocalSafeService {
+abstract class ILocalSafeService {
   Future<void> setThemeMode(int input);
   int? getThemeMode();
 

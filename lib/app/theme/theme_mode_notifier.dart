@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_issue_viewer/model/interface/local_safe_service.dart';
-import 'package:github_issue_viewer/model/shared_preferences_service.dart';
+import 'package:github_issue_viewer/model/interface/i_local_safe_service.dart';
+import 'package:github_issue_viewer/model/service/shared_preferences_service.dart';
 
 final themeModeProvider = StateNotifierProvider<ThemeModeNotifier, ThemeMode>(
     (ref) => ThemeModeNotifier(ref.read(sharedPreferencesServiceProvider)));
@@ -13,7 +13,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
     _initialize();
   }
 
-  final LocalSafeService localSafeService;
+  final ILocalSafeService localSafeService;
 
   void _initialize() {
     state = _getLocalThemeMode();

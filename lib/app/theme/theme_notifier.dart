@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
-import 'package:github_issue_viewer/model/interface/local_safe_service.dart';
-import 'package:github_issue_viewer/model/shared_preferences_service.dart';
+import 'package:github_issue_viewer/model/interface/i_local_safe_service.dart';
+import 'package:github_issue_viewer/model/service/shared_preferences_service.dart';
 
 final themeProvider = StateNotifierProvider<ThemeNotifier, AppTheme>(
     (ref) => ThemeNotifier(ref.read(sharedPreferencesServiceProvider)));
@@ -13,7 +13,7 @@ class ThemeNotifier extends StateNotifier<AppTheme> {
     _initialize();
   }
 
-  final LocalSafeService localSafeService;
+  final ILocalSafeService localSafeService;
 
   void _initialize() {
     state = _getLocalTheme();

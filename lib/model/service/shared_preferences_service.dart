@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_issue_viewer/model/interface/local_safe_service.dart';
+import 'package:github_issue_viewer/model/interface/i_local_safe_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final sharedPreferencesServiceProvider =
-    Provider<LocalSafeService>((ref) => throw UnimplementedError());
+    Provider<ILocalSafeService>((ref) => throw UnimplementedError());
 
-class SharedPreferencesService implements LocalSafeService {
+class SharedPreferencesService implements ILocalSafeService {
   SharedPreferencesService(this.sharedPreferences);
   final SharedPreferences sharedPreferences;
 

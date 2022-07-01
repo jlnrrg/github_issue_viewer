@@ -1,0 +1,21 @@
+query getIssues($first: Int) {
+  repository(owner: "flutter", name: "flutter") {
+    issues(first: $first) {
+      nodes {
+        id
+        title
+        createdAt
+        closed
+        author {
+          login
+        }
+        labels(first: 10) {
+          nodes {
+            name
+            color
+          }
+        }
+      }
+    }
+  }
+}
