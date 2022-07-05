@@ -14,6 +14,7 @@ import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
+import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue_card.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -101,7 +102,26 @@ class HotReload extends StatelessWidget {
                       isExpanded: true,
                     ),
                   ],
-                  folders: [],
+                  folders: [
+                    WidgetbookFolder(
+                      name: 'issue',
+                      widgets: [
+                        WidgetbookComponent(
+                          name: 'ClosedIndicator',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  closedIndicatorUseCase(context),
+                            ),
+                          ],
+                          isExpanded: true,
+                        ),
+                      ],
+                      folders: [],
+                      isExpanded: true,
+                    ),
+                  ],
                   isExpanded: true,
                 ),
               ],
