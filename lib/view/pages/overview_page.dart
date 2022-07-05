@@ -5,7 +5,9 @@ import 'package:github_issue_viewer/app/issues/reader/issues_reader_notifier.dar
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
+import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/issue_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class OverviewPage extends ConsumerWidget {
@@ -20,8 +22,10 @@ class OverviewPage extends ConsumerWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        heroTag: 'filterFAB',
         child: const Icon(Icons.filter_alt),
-        onPressed: () => null,
+        onPressed: () =>
+            GoRouter.of(context).pushNamed(MyRouter.routeNameFilter),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: const _InfiniteIssueList(),

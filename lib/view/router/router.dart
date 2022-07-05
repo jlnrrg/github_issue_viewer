@@ -1,4 +1,5 @@
 import 'package:github_issue_viewer/view/pages/error_page.dart';
+import 'package:github_issue_viewer/view/pages/filter_page.dart';
 import 'package:github_issue_viewer/view/pages/issue_page.dart';
 import 'package:github_issue_viewer/view/pages/overview_page.dart';
 import 'package:go_router/go_router.dart';
@@ -28,6 +29,11 @@ class MyRouter {
       path: routePathError,
       name: routeNameError,
       builder: (context, state) => const ErrorPage(),
+    ),
+    GoRoute(
+      path: routePathFilter,
+      name: routeNameFilter,
+      builder: (context, state) => const FilterPage(),
     )
   ]);
 
@@ -38,4 +44,6 @@ class MyRouter {
   static const String routePathIssue = '/issue/:n';
   static const String routeNameError = 'error';
   static const String routePathError = '/error';
+  static const String routeNameFilter = 'filter';
+  static const String routePathFilter = '/filter';
 }

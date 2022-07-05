@@ -15,7 +15,7 @@
   - [x] Tapping on an issue should navigate to the detail page
   - [x] Visited issues are distinguished from others
 - Issue detail page
-  - [ ] Display title, author, description, creation date and other relevant information in a readable manner
+  - [x] Display title, author, description, creation date and other relevant information in a readable manner
 - Other
   - [ ] error handling
 
