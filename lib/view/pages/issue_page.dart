@@ -3,20 +3,26 @@ import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:go_router/go_router.dart';
 
 class IssuePage extends StatelessWidget {
-  const IssuePage({Key? key}) : super(key: key);
+  const IssuePage({Key? key, required this.issueNumber}) : super(key: key);
+
+  final int issueNumber;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          const Text('Issue'),
-          TextButton(
-              onPressed: () =>
-                  context.go(context.namedLocation(MyRouter.routeNameOverview)),
-              child: const Text('To Overview'))
-        ],
-      ),
-    );
+    return Hero(
+        tag: issueNumber,
+        child: Scaffold(
+          appBar:
+              AppBar(leading: const BackButton(), title: Text('#$issueNumber')),
+          body: Column(
+            children: [
+              const Text('Title'),
+              TextButton(
+                  onPressed: () =>
+                      context.pushNamed(MyRouter.routeNameOverview),
+                  child: const Text('To Overview'))
+            ],
+          ),
+        ));
   }
 }

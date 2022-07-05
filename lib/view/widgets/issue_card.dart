@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
+import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 @WidgetbookUseCase(name: 'Closed with Labels', type: IssueCard)
@@ -27,65 +29,74 @@ class IssueCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: heigth, maxWidth: 600),
-      child: Stack(alignment: Alignment.center, children: [
-        Padding(
-          padding: hasOverlay
-              ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
-              : EdgeInsets.zero,
-          child: InkWell(
-            borderRadius: borderRadius,
-            onTap: () => debugPrint('called'),
-            child: Card(
-                shape: RoundedRectangleBorder(borderRadius: borderRadius),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(right: issue.closed ? 16 : 0),
-                        child: Text(
-                          issue.title,
-                          style: Theme.of(context).textTheme.subtitle1,
-                          maxLines: 2,
+    return Hero(
+        tag: issue.number,
+        child: Material(
+          color: Colors.transparent,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: heigth, maxWidth: 600),
+            child: Stack(alignment: Alignment.center, children: [
+              Padding(
+                padding: hasOverlay
+                    ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
+                    : EdgeInsets.zero,
+                child: InkWell(
+                  borderRadius: borderRadius,
+                  onTap: () => GoRouter.of(context).pushNamed(
+                      MyRouter.routeNameIssue,
+                      params: {'n': issue.number.toString()}),
+                  child: Card(
+                      shape: RoundedRectangleBorder(borderRadius: borderRadius),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(right: issue.closed ? 16 : 0),
+                              child: Text(
+                                issue.title,
+                                style: Theme.of(context).textTheme.subtitle1,
+                                maxLines: 2,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('by ${issue.author.name}'),
+                                // Text(issue.createdAt.toString())
+                              ],
+                            )
+                          ],
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text('by ${issue.author.name}'),
-                          // Text(issue.createdAt.toString())
-                        ],
-                      )
-                    ],
-                  ),
-                )),
+                      )),
+                ),
+              ),
+              Positioned(
+                top: 0,
+                right: 0,
+                child: ClosedIndicator(
+                  size: 32,
+                  borderWidth: 1.5,
+                  isClosed: issue.closed,
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Wrap(
+                  alignment: WrapAlignment.end,
+                  // mainAxisAlignment: MainAxisAlignment.end,
+                  runSpacing: 4,
+                  spacing: 4,
+                  children: issue.labels
+                      .map((e) => LabelIndicator(label: e))
+                      .toList(),
+                ),
+              ),
+            ]),
           ),
-        ),
-        Positioned(
-          top: 0,
-          right: 0,
-          child: ClosedIndicator(
-            size: 32,
-            borderWidth: 1.5,
-            isClosed: issue.closed,
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Wrap(
-            alignment: WrapAlignment.end,
-            // mainAxisAlignment: MainAxisAlignment.end,
-            runSpacing: 4,
-            spacing: 4,
-            children:
-                issue.labels.map((e) => LabelIndicator(label: e)).toList(),
-          ),
-        ),
-      ]),
-    );
+        ));
   }
 }

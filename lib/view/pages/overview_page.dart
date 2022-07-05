@@ -5,19 +5,21 @@ import 'package:github_issue_viewer/app/issues/reader/issue_reader_notifier.dart
 import 'package:github_issue_viewer/app/issues/reader/issues_reader_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
+import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
+import 'package:github_issue_viewer/view/widgets/issue_card.dart';
 import 'package:go_router/go_router.dart';
 
 class OverviewPage extends ConsumerWidget {
-  const OverviewPage({Key? key}) : super(key: key);
+  OverviewPage({Key? key}) : super(key: key);
+
+  final p = issueProvider(16);
 
   @override
   Widget build(BuildContext context, ref) {
     final appTheme = ref.watch(themeProvider);
     final themeMode = ref.watch(themeModeProvider);
-
-    final issueP = ref.watch(issueProvider(16).notifier);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -25,16 +27,17 @@ class OverviewPage extends ConsumerWidget {
           children: [
             const Text('Overview'),
             TextButton(
-                onPressed: () =>
-                    context.go(context.namedLocation(MyRouter.routeNameIssue)),
+                onPressed: () => context
+                    .pushNamed(MyRouter.routeNameIssue, params: {'n': '1'}),
                 child: const Text('To Issue')),
             TextButton(
                 onPressed: () => ref.read(issuesProvider.notifier).fetched(),
                 child: const Text('Fetch all Issues')),
             TextButton(
-                onPressed: () => issueP.fetched(),
+                onPressed: () => ref.read(p.notifier).fetched(),
                 child: Text(
-                    'Fetch one Issues ${issueP.state.value?.number ?? '?'}')),
+                    'Fetch one Issues ${ref.watch(p).value?.number ?? '?'}')),
+            IssueCard(issue: mockIssue),
             for (ThemeMode tm in [ThemeMode.light, ThemeMode.dark])
               Wrap(
                 children: AppTheme.all

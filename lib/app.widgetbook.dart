@@ -19,6 +19,7 @@ import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
