@@ -154,6 +154,20 @@ Map<String, dynamic> _$GetComments$QueryToJson(GetComments$Query instance) =>
       'repository': instance.repository?.toJson(),
     };
 
+GetIssues$Query$Repository$Issues$PageInfo
+    _$GetIssues$Query$Repository$Issues$PageInfoFromJson(
+            Map<String, dynamic> json) =>
+        GetIssues$Query$Repository$Issues$PageInfo()
+          ..hasNextPage = json['hasNextPage'] as bool
+          ..endCursor = json['endCursor'] as String?;
+
+Map<String, dynamic> _$GetIssues$Query$Repository$Issues$PageInfoToJson(
+        GetIssues$Query$Repository$Issues$PageInfo instance) =>
+    <String, dynamic>{
+      'hasNextPage': instance.hasNextPage,
+      'endCursor': instance.endCursor,
+    };
+
 GetIssues$Query$Repository$Issues$Nodes$Author
     _$GetIssues$Query$Repository$Issues$Nodes$AuthorFromJson(
             Map<String, dynamic> json) =>
@@ -169,6 +183,38 @@ Map<String, dynamic> _$GetIssues$Query$Repository$Issues$Nodes$AuthorToJson(
       'login': instance.login,
       'url': instance.url.toString(),
     };
+
+GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors
+    _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$ReactorsFromJson(
+            Map<String, dynamic> json) =>
+        GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors()
+          ..totalCount = json['totalCount'] as int;
+
+Map<String, dynamic>
+    _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$ReactorsToJson(
+            GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors
+                instance) =>
+        <String, dynamic>{
+          'totalCount': instance.totalCount,
+        };
+
+GetIssues$Query$Repository$Issues$Nodes$ReactionGroups
+    _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetIssues$Query$Repository$Issues$Nodes$ReactionGroups()
+          ..content = $enumDecode(_$ReactionContentEnumMap, json['content'],
+              unknownValue: ReactionContent.artemisUnknown)
+          ..reactors =
+              GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors
+                  .fromJson(json['reactors'] as Map<String, dynamic>);
+
+Map<String, dynamic>
+    _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroupsToJson(
+            GetIssues$Query$Repository$Issues$Nodes$ReactionGroups instance) =>
+        <String, dynamic>{
+          'content': _$ReactionContentEnumMap[instance.content],
+          'reactors': instance.reactors.toJson(),
+        };
 
 GetIssues$Query$Repository$Issues$Nodes$Labels$Nodes
     _$GetIssues$Query$Repository$Issues$Nodes$Labels$NodesFromJson(
@@ -212,14 +258,21 @@ GetIssues$Query$Repository$Issues$Nodes
         GetIssues$Query$Repository$Issues$Nodes()
           ..id = json['id'] as String
           ..number = json['number'] as int
-          ..url = Uri.parse(json['url'] as String)
           ..title = json['title'] as String
-          ..createdAt = DateTime.parse(json['createdAt'] as String)
-          ..closed = json['closed'] as bool
           ..author = json['author'] == null
               ? null
               : GetIssues$Query$Repository$Issues$Nodes$Author.fromJson(
                   json['author'] as Map<String, dynamic>)
+          ..body = json['body'] as String
+          ..closed = json['closed'] as bool
+          ..createdAt = DateTime.parse(json['createdAt'] as String)
+          ..updatedAt = DateTime.parse(json['updatedAt'] as String)
+          ..url = Uri.parse(json['url'] as String)
+          ..reactionGroups = (json['reactionGroups'] as List<dynamic>?)
+              ?.map((e) =>
+                  GetIssues$Query$Repository$Issues$Nodes$ReactionGroups
+                      .fromJson(e as Map<String, dynamic>))
+              .toList()
           ..labels = json['labels'] == null
               ? null
               : GetIssues$Query$Repository$Issues$Nodes$Labels.fromJson(
@@ -230,17 +283,23 @@ Map<String, dynamic> _$GetIssues$Query$Repository$Issues$NodesToJson(
     <String, dynamic>{
       'id': instance.id,
       'number': instance.number,
-      'url': instance.url.toString(),
       'title': instance.title,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'closed': instance.closed,
       'author': instance.author?.toJson(),
+      'body': instance.body,
+      'closed': instance.closed,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+      'url': instance.url.toString(),
+      'reactionGroups':
+          instance.reactionGroups?.map((e) => e.toJson()).toList(),
       'labels': instance.labels?.toJson(),
     };
 
 GetIssues$Query$Repository$Issues _$GetIssues$Query$Repository$IssuesFromJson(
         Map<String, dynamic> json) =>
     GetIssues$Query$Repository$Issues()
+      ..pageInfo = GetIssues$Query$Repository$Issues$PageInfo.fromJson(
+          json['pageInfo'] as Map<String, dynamic>)
       ..nodes = (json['nodes'] as List<dynamic>?)
           ?.map((e) => e == null
               ? null
@@ -251,6 +310,7 @@ GetIssues$Query$Repository$Issues _$GetIssues$Query$Repository$IssuesFromJson(
 Map<String, dynamic> _$GetIssues$Query$Repository$IssuesToJson(
         GetIssues$Query$Repository$Issues instance) =>
     <String, dynamic>{
+      'pageInfo': instance.pageInfo.toJson(),
       'nodes': instance.nodes?.map((e) => e?.toJson()).toList(),
     };
 
@@ -278,20 +338,113 @@ Map<String, dynamic> _$GetIssues$QueryToJson(GetIssues$Query instance) =>
       'repository': instance.repository?.toJson(),
     };
 
+IssueOrder _$IssueOrderFromJson(Map<String, dynamic> json) => IssueOrder(
+      direction: $enumDecode(_$OrderDirectionEnumMap, json['direction'],
+          unknownValue: OrderDirection.artemisUnknown),
+      field: $enumDecode(_$IssueOrderFieldEnumMap, json['field'],
+          unknownValue: IssueOrderField.artemisUnknown),
+    );
+
+Map<String, dynamic> _$IssueOrderToJson(IssueOrder instance) =>
+    <String, dynamic>{
+      'direction': _$OrderDirectionEnumMap[instance.direction],
+      'field': _$IssueOrderFieldEnumMap[instance.field],
+    };
+
+const _$OrderDirectionEnumMap = {
+  OrderDirection.asc: 'ASC',
+  OrderDirection.desc: 'DESC',
+  OrderDirection.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+const _$IssueOrderFieldEnumMap = {
+  IssueOrderField.comments: 'COMMENTS',
+  IssueOrderField.createdAt: 'CREATED_AT',
+  IssueOrderField.updatedAt: 'UPDATED_AT',
+  IssueOrderField.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
+IssueFilters _$IssueFiltersFromJson(Map<String, dynamic> json) => IssueFilters(
+      assignee: json['assignee'] as String?,
+      createdBy: json['createdBy'] as String?,
+      labels:
+          (json['labels'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      mentioned: json['mentioned'] as String?,
+      milestone: json['milestone'] as String?,
+      milestoneNumber: json['milestoneNumber'] as String?,
+      since: json['since'] == null
+          ? null
+          : DateTime.parse(json['since'] as String),
+      states: (json['states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$IssueStateEnumMap, e,
+              unknownValue: IssueState.artemisUnknown))
+          .toList(),
+      viewerSubscribed: json['viewerSubscribed'] as bool?,
+    );
+
+Map<String, dynamic> _$IssueFiltersToJson(IssueFilters instance) =>
+    <String, dynamic>{
+      'assignee': instance.assignee,
+      'createdBy': instance.createdBy,
+      'labels': instance.labels,
+      'mentioned': instance.mentioned,
+      'milestone': instance.milestone,
+      'milestoneNumber': instance.milestoneNumber,
+      'since': instance.since?.toIso8601String(),
+      'states': instance.states?.map((e) => _$IssueStateEnumMap[e]).toList(),
+      'viewerSubscribed': instance.viewerSubscribed,
+    };
+
+const _$IssueStateEnumMap = {
+  IssueState.closed: 'CLOSED',
+  IssueState.open: 'OPEN',
+  IssueState.artemisUnknown: 'ARTEMIS_UNKNOWN',
+};
+
 GetIssue$Query$Repository$Issue$Author
     _$GetIssue$Query$Repository$Issue$AuthorFromJson(
             Map<String, dynamic> json) =>
         GetIssue$Query$Repository$Issue$Author()
-          ..login = json['login'] as String
           ..avatarUrl = Uri.parse(json['avatarUrl'] as String)
+          ..login = json['login'] as String
           ..url = Uri.parse(json['url'] as String);
 
 Map<String, dynamic> _$GetIssue$Query$Repository$Issue$AuthorToJson(
         GetIssue$Query$Repository$Issue$Author instance) =>
     <String, dynamic>{
-      'login': instance.login,
       'avatarUrl': instance.avatarUrl.toString(),
+      'login': instance.login,
       'url': instance.url.toString(),
+    };
+
+GetIssue$Query$Repository$Issue$ReactionGroups$Reactors
+    _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsFromJson(
+            Map<String, dynamic> json) =>
+        GetIssue$Query$Repository$Issue$ReactionGroups$Reactors()
+          ..totalCount = json['totalCount'] as int;
+
+Map<String, dynamic>
+    _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsToJson(
+            GetIssue$Query$Repository$Issue$ReactionGroups$Reactors instance) =>
+        <String, dynamic>{
+          'totalCount': instance.totalCount,
+        };
+
+GetIssue$Query$Repository$Issue$ReactionGroups
+    _$GetIssue$Query$Repository$Issue$ReactionGroupsFromJson(
+            Map<String, dynamic> json) =>
+        GetIssue$Query$Repository$Issue$ReactionGroups()
+          ..content = $enumDecode(_$ReactionContentEnumMap, json['content'],
+              unknownValue: ReactionContent.artemisUnknown)
+          ..reactors =
+              GetIssue$Query$Repository$Issue$ReactionGroups$Reactors.fromJson(
+                  json['reactors'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$GetIssue$Query$Repository$Issue$ReactionGroupsToJson(
+        GetIssue$Query$Repository$Issue$ReactionGroups instance) =>
+    <String, dynamic>{
+      'content': _$ReactionContentEnumMap[instance.content],
+      'reactors': instance.reactors.toJson(),
     };
 
 GetIssue$Query$Repository$Issue$Labels$Nodes
@@ -329,36 +482,6 @@ Map<String, dynamic> _$GetIssue$Query$Repository$Issue$LabelsToJson(
       'nodes': instance.nodes?.map((e) => e?.toJson()).toList(),
     };
 
-GetIssue$Query$Repository$Issue$ReactionGroups$Reactors
-    _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsFromJson(
-            Map<String, dynamic> json) =>
-        GetIssue$Query$Repository$Issue$ReactionGroups$Reactors()
-          ..totalCount = json['totalCount'] as int;
-
-Map<String, dynamic>
-    _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsToJson(
-            GetIssue$Query$Repository$Issue$ReactionGroups$Reactors instance) =>
-        <String, dynamic>{
-          'totalCount': instance.totalCount,
-        };
-
-GetIssue$Query$Repository$Issue$ReactionGroups
-    _$GetIssue$Query$Repository$Issue$ReactionGroupsFromJson(
-            Map<String, dynamic> json) =>
-        GetIssue$Query$Repository$Issue$ReactionGroups()
-          ..content = $enumDecode(_$ReactionContentEnumMap, json['content'],
-              unknownValue: ReactionContent.artemisUnknown)
-          ..reactors =
-              GetIssue$Query$Repository$Issue$ReactionGroups$Reactors.fromJson(
-                  json['reactors'] as Map<String, dynamic>);
-
-Map<String, dynamic> _$GetIssue$Query$Repository$Issue$ReactionGroupsToJson(
-        GetIssue$Query$Repository$Issue$ReactionGroups instance) =>
-    <String, dynamic>{
-      'content': _$ReactionContentEnumMap[instance.content],
-      'reactors': instance.reactors.toJson(),
-    };
-
 GetIssue$Query$Repository$Issue _$GetIssue$Query$Repository$IssueFromJson(
         Map<String, dynamic> json) =>
     GetIssue$Query$Repository$Issue()
@@ -374,14 +497,14 @@ GetIssue$Query$Repository$Issue _$GetIssue$Query$Repository$IssueFromJson(
       ..createdAt = DateTime.parse(json['createdAt'] as String)
       ..updatedAt = DateTime.parse(json['updatedAt'] as String)
       ..url = Uri.parse(json['url'] as String)
-      ..labels = json['labels'] == null
-          ? null
-          : GetIssue$Query$Repository$Issue$Labels.fromJson(
-              json['labels'] as Map<String, dynamic>)
       ..reactionGroups = (json['reactionGroups'] as List<dynamic>?)
           ?.map((e) => GetIssue$Query$Repository$Issue$ReactionGroups.fromJson(
               e as Map<String, dynamic>))
-          .toList();
+          .toList()
+      ..labels = json['labels'] == null
+          ? null
+          : GetIssue$Query$Repository$Issue$Labels.fromJson(
+              json['labels'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetIssue$Query$Repository$IssueToJson(
         GetIssue$Query$Repository$Issue instance) =>
@@ -395,9 +518,9 @@ Map<String, dynamic> _$GetIssue$Query$Repository$IssueToJson(
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
       'url': instance.url.toString(),
-      'labels': instance.labels?.toJson(),
       'reactionGroups':
           instance.reactionGroups?.map((e) => e.toJson()).toList(),
+      'labels': instance.labels?.toJson(),
     };
 
 GetIssue$Query$Repository _$GetIssue$Query$RepositoryFromJson(
@@ -442,12 +565,27 @@ Map<String, dynamic> _$GetCommentsArgumentsToJson(
 
 GetIssuesArguments _$GetIssuesArgumentsFromJson(Map<String, dynamic> json) =>
     GetIssuesArguments(
-      last: json['last'] as int,
+      first: json['first'] as int,
+      after: json['after'] as String?,
+      order: json['order'] == null
+          ? null
+          : IssueOrder.fromJson(json['order'] as Map<String, dynamic>),
+      filters: json['filters'] == null
+          ? null
+          : IssueFilters.fromJson(json['filters'] as Map<String, dynamic>),
+      states: (json['states'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$IssueStateEnumMap, e,
+              unknownValue: IssueState.artemisUnknown))
+          .toList(),
     );
 
 Map<String, dynamic> _$GetIssuesArgumentsToJson(GetIssuesArguments instance) =>
     <String, dynamic>{
-      'last': instance.last,
+      'first': instance.first,
+      'after': instance.after,
+      'order': instance.order?.toJson(),
+      'filters': instance.filters?.toJson(),
+      'states': instance.states?.map((e) => _$IssueStateEnumMap[e]).toList(),
     };
 
 GetIssueArguments _$GetIssueArgumentsFromJson(Map<String, dynamic> json) =>

@@ -1,10 +1,13 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
+import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 
 @WidgetbookUseCase(name: 'Closed with Labels', type: IssueCard)
@@ -23,80 +26,120 @@ class IssueCard extends StatelessWidget {
   final Issue issue;
 
   double get heigth => 120;
-  BorderRadius get borderRadius => const BorderRadius.all(Radius.circular(10));
+  BorderRadius get borderRadius => BorderRadius.all(radius);
+  Radius get radius => const Radius.circular(10);
 
   bool get hasOverlay => issue.labels.isNotEmpty || issue.closed;
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat('d.M.y HH:mm');
+
     return Hero(
         tag: issue.number,
         child: Material(
-          color: Colors.transparent,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxHeight: heigth, maxWidth: 600),
-            child: Stack(alignment: Alignment.center, children: [
-              Padding(
-                padding: hasOverlay
-                    ? const EdgeInsets.fromLTRB(0, 8, 8, 8)
-                    : EdgeInsets.zero,
+            color: Colors.transparent,
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 600),
                 child: InkWell(
                   borderRadius: borderRadius,
                   onTap: () => GoRouter.of(context).pushNamed(
                       MyRouter.routeNameIssue,
                       params: {'n': issue.number.toString()}),
                   child: Card(
-                      shape: RoundedRectangleBorder(borderRadius: borderRadius),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(right: issue.closed ? 16 : 0),
-                              child: Text(
-                                issue.title,
-                                style: Theme.of(context).textTheme.subtitle1,
-                                maxLines: 2,
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: borderRadius,
+                      side: BorderSide(
+                          color: Theme.of(context).primaryColor, width: 1),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      issue.title,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.bold),
+                                      maxLines: 2,
+                                    ),
+                                  ),
+                                  if (issue.closed)
+                                    const ClosedIndicator(
+                                      size: 24,
+                                      borderWidth: 1.5,
+                                    ),
+                                ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('by ${issue.author.name}'),
-                                // Text(issue.createdAt.toString())
-                              ],
-                            )
-                          ],
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                      '#${issue.number} by ${issue.author.name}'),
+                                  Text(dateFormat.format(issue.createdAt))
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      )),
-                ),
-              ),
-              Positioned(
-                top: 0,
-                right: 0,
-                child: ClosedIndicator(
-                  size: 32,
-                  borderWidth: 1.5,
-                  isClosed: issue.closed,
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Wrap(
-                  alignment: WrapAlignment.end,
-                  // mainAxisAlignment: MainAxisAlignment.end,
-                  runSpacing: 4,
-                  spacing: 4,
-                  children: issue.labels
-                      .map((e) => LabelIndicator(label: e))
-                      .toList(),
-                ),
-              ),
-            ]),
-          ),
-        ));
+                        if (issue.labels.isNotEmpty)
+                          IntrinsicHeight(
+                            child: Container(
+                                width: double.infinity,
+                                decoration: ShapeDecoration(
+                                    color: Theme.of(context).cardColor.blend(
+                                        Theme.of(context).colorScheme.primary,
+                                        AppTheme.defaultBlend(
+                                                Theme.of(context).brightness) +
+                                            10),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                            bottomLeft: radius,
+                                            bottomRight: radius))),
+                                padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+                                child: Wrap(
+                                  runSpacing: 4,
+                                  spacing: 4,
+                                  alignment: WrapAlignment.end,
+                                  children: issue.labels
+                                      .map((e) => LabelIndicator(label: e))
+                                      .toList(),
+                                )),
+                          ),
+                      ],
+                    ),
+                  ),
+                )
+
+                // Positioned(
+                //   bottom: 0,
+                //   right: 0,
+                //   child: Wrap(
+                //     alignment: WrapAlignment.end,
+                //     // mainAxisAlignment: MainAxisAlignment.end,
+                //     runSpacing: 4,
+                //     spacing: 4,
+                //     children: issue.labels
+                //         .map((e) => LabelIndicator(label: e))
+                //         .toList(),
+                //   ),
+                // ),
+                )));
   }
 }

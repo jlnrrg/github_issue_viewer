@@ -5,8 +5,8 @@ query getIssue($number: Int!) {
       number
       title
       author {
-        login
         avatarUrl
+        login
         url
       }
       body
@@ -14,18 +14,18 @@ query getIssue($number: Int!) {
       createdAt
       updatedAt
       url
+      reactionGroups {
+        content
+        reactors {
+          totalCount
+        }
+      }
       labels(first: 10) {
         nodes {
           id
           name
           description
           color
-        }
-      }
-      reactionGroups {
-        content
-        reactors {
-          totalCount
         }
       }
     }

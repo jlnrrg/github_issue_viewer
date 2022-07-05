@@ -18,9 +18,18 @@ class FlutterRepository implements IRepository {
 
   final GraphQLClient apiClient;
 
+  String? cursor;
+
   @override
-  Future<Either<ModelFailure, List<Issue>>> getIssues() async {
-    final query = GetIssuesQuery(variables: GetIssuesArguments(last: 10));
+  void setPaginationReset() {
+    cursor = null;
+  }
+
+  @override
+  Future<Either<ModelFailure, List<Issue>>> getPaginationNext(
+      int amount) async {
+    final query = GetIssuesQuery(
+        variables: GetIssuesArguments(first: amount, after: cursor));
 
     final result = await apiClient.query(QueryOptions(
       document: query.document,
@@ -43,6 +52,8 @@ class FlutterRepository implements IRepository {
             list.add(domain);
           }
         }
+        // set the cursor for the next request
+        cursor = queryResult.repository?.issues.pageInfo.endCursor;
         return right(list);
       } catch (e) {
         return left(ModelFailure.parsing(e.toString()));

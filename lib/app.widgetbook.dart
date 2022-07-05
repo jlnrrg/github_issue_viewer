@@ -5,16 +5,25 @@
 // **************************************************************************
 
 import 'dart:core';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/app.dart';
+import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
+import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
+import 'package:github_issue_viewer/domain/entities/issue.dart';
+import 'package:github_issue_viewer/domain/entities/label.dart';
+import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
+import 'package:github_issue_viewer/domain/entities/mock/label.dart';
+import 'package:github_issue_viewer/domain/theme.dart';
+import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/issue_card.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
-  runApp(const HotReload());
+  runApp(HotReload());
 }
 
 class HotReload extends StatelessWidget {
@@ -37,7 +46,7 @@ class HotReload extends StatelessWidget {
         ),
       ],
       devices: [
-        const Device(
+        Device(
           name: 'iPhone 6',
           resolution: Resolution(
             nativeSize: DeviceSize(
@@ -48,7 +57,7 @@ class HotReload extends StatelessWidget {
           ),
           type: DeviceType.mobile,
         ),
-        const Device(
+        Device(
           name: '12.9" iPad Pro',
           resolution: Resolution(
             nativeSize: DeviceSize(
@@ -61,11 +70,11 @@ class HotReload extends StatelessWidget {
         ),
       ],
       frames: [
-        const WidgetbookFrame(
+        WidgetbookFrame(
           name: 'Widgetbook',
           allowsDevices: true,
         ),
-        const WidgetbookFrame(
+        WidgetbookFrame(
           name: 'None',
           allowsDevices: false,
         ),
@@ -85,26 +94,25 @@ class HotReload extends StatelessWidget {
               folders: [
                 WidgetbookFolder(
                   name: 'widgets',
-                  widgets: [
-                    WidgetbookComponent(
-                      name: 'IssueCard',
-                      useCases: [
-                        WidgetbookUseCase(
-                          name: 'Closed with Labels',
-                          builder: (context) => issueCard1UseCase(context),
-                        ),
-                        WidgetbookUseCase(
-                          name: 'Open',
-                          builder: (context) => issueCard2UseCase(context),
-                        ),
-                      ],
-                      isExpanded: true,
-                    ),
-                  ],
+                  widgets: [],
                   folders: [
                     WidgetbookFolder(
                       name: 'issue',
                       widgets: [
+                        WidgetbookComponent(
+                          name: 'IssueCard',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Closed with Labels',
+                              builder: (context) => issueCard1UseCase(context),
+                            ),
+                            WidgetbookUseCase(
+                              name: 'Open',
+                              builder: (context) => issueCard2UseCase(context),
+                            ),
+                          ],
+                          isExpanded: true,
+                        ),
                         WidgetbookComponent(
                           name: 'ClosedIndicator',
                           useCases: [

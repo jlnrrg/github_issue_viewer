@@ -1,17 +1,41 @@
-query getIssues($last: Int!) {
+query getIssues(
+  $first: Int!
+  $after: String
+  $order: IssueOrder
+  $filters: IssueFilters
+  $states: [IssueState!]
+) {
   repository(owner: "flutter", name: "flutter") {
-    issues(last: $last) {
+    issues(
+      first: $first
+      after: $after
+      orderBy: $order
+      filterBy: $filters
+      states: $states
+    ) {
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
       nodes {
         id
         number
-        url
         title
-        createdAt
-        closed
         author {
           avatarUrl
           login
           url
+        }
+        body
+        closed
+        createdAt
+        updatedAt
+        url
+        reactionGroups {
+          content
+          reactors {
+            totalCount
+          }
         }
         labels(first: 10) {
           nodes {

@@ -171,6 +171,26 @@ class GetComments$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class GetIssues$Query$Repository$Issues$PageInfo extends JsonSerializable
+    with EquatableMixin {
+  GetIssues$Query$Repository$Issues$PageInfo();
+
+  factory GetIssues$Query$Repository$Issues$PageInfo.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetIssues$Query$Repository$Issues$PageInfoFromJson(json);
+
+  late bool hasNextPage;
+
+  String? endCursor;
+
+  @override
+  List<Object?> get props => [hasNextPage, endCursor];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetIssues$Query$Repository$Issues$PageInfoToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetIssues$Query$Repository$Issues$Nodes$Author extends JsonSerializable
     with EquatableMixin {
   GetIssues$Query$Repository$Issues$Nodes$Author();
@@ -190,6 +210,47 @@ class GetIssues$Query$Repository$Issues$Nodes$Author extends JsonSerializable
   @override
   Map<String, dynamic> toJson() =>
       _$GetIssues$Query$Repository$Issues$Nodes$AuthorToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors
+    extends JsonSerializable with EquatableMixin {
+  GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors();
+
+  factory GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$ReactorsFromJson(
+          json);
+
+  late int totalCount;
+
+  @override
+  List<Object?> get props => [totalCount];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$ReactorsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetIssues$Query$Repository$Issues$Nodes$ReactionGroups
+    extends JsonSerializable with EquatableMixin {
+  GetIssues$Query$Repository$Issues$Nodes$ReactionGroups();
+
+  factory GetIssues$Query$Repository$Issues$Nodes$ReactionGroups.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroupsFromJson(json);
+
+  @JsonKey(unknownEnumValue: ReactionContent.artemisUnknown)
+  late ReactionContent content;
+
+  late GetIssues$Query$Repository$Issues$Nodes$ReactionGroups$Reactors reactors;
+
+  @override
+  List<Object?> get props => [content, reactors];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetIssues$Query$Repository$Issues$Nodes$ReactionGroupsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -247,21 +308,38 @@ class GetIssues$Query$Repository$Issues$Nodes extends JsonSerializable
 
   late int number;
 
-  late Uri url;
-
   late String title;
 
-  late DateTime createdAt;
+  GetIssues$Query$Repository$Issues$Nodes$Author? author;
+
+  late String body;
 
   late bool closed;
 
-  GetIssues$Query$Repository$Issues$Nodes$Author? author;
+  late DateTime createdAt;
+
+  late DateTime updatedAt;
+
+  late Uri url;
+
+  List<GetIssues$Query$Repository$Issues$Nodes$ReactionGroups>? reactionGroups;
 
   GetIssues$Query$Repository$Issues$Nodes$Labels? labels;
 
   @override
-  List<Object?> get props =>
-      [id, number, url, title, createdAt, closed, author, labels];
+  List<Object?> get props => [
+        id,
+        number,
+        title,
+        author,
+        body,
+        closed,
+        createdAt,
+        updatedAt,
+        url,
+        reactionGroups,
+        labels
+      ];
   @override
   Map<String, dynamic> toJson() =>
       _$GetIssues$Query$Repository$Issues$NodesToJson(this);
@@ -276,10 +354,12 @@ class GetIssues$Query$Repository$Issues extends JsonSerializable
           Map<String, dynamic> json) =>
       _$GetIssues$Query$Repository$IssuesFromJson(json);
 
+  late GetIssues$Query$Repository$Issues$PageInfo pageInfo;
+
   List<GetIssues$Query$Repository$Issues$Nodes?>? nodes;
 
   @override
-  List<Object?> get props => [nodes];
+  List<Object?> get props => [pageInfo, nodes];
   @override
   Map<String, dynamic> toJson() =>
       _$GetIssues$Query$Repository$IssuesToJson(this);
@@ -316,6 +396,76 @@ class GetIssues$Query extends JsonSerializable with EquatableMixin {
 }
 
 @JsonSerializable(explicitToJson: true)
+class IssueOrder extends JsonSerializable with EquatableMixin {
+  IssueOrder({required this.direction, required this.field});
+
+  factory IssueOrder.fromJson(Map<String, dynamic> json) =>
+      _$IssueOrderFromJson(json);
+
+  @JsonKey(unknownEnumValue: OrderDirection.artemisUnknown)
+  late OrderDirection direction;
+
+  @JsonKey(unknownEnumValue: IssueOrderField.artemisUnknown)
+  late IssueOrderField field;
+
+  @override
+  List<Object?> get props => [direction, field];
+  @override
+  Map<String, dynamic> toJson() => _$IssueOrderToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class IssueFilters extends JsonSerializable with EquatableMixin {
+  IssueFilters(
+      {this.assignee,
+      this.createdBy,
+      this.labels,
+      this.mentioned,
+      this.milestone,
+      this.milestoneNumber,
+      this.since,
+      this.states,
+      this.viewerSubscribed});
+
+  factory IssueFilters.fromJson(Map<String, dynamic> json) =>
+      _$IssueFiltersFromJson(json);
+
+  String? assignee;
+
+  String? createdBy;
+
+  List<String>? labels;
+
+  String? mentioned;
+
+  String? milestone;
+
+  String? milestoneNumber;
+
+  DateTime? since;
+
+  @JsonKey(unknownEnumValue: IssueState.artemisUnknown)
+  List<IssueState>? states;
+
+  bool? viewerSubscribed;
+
+  @override
+  List<Object?> get props => [
+        assignee,
+        createdBy,
+        labels,
+        mentioned,
+        milestone,
+        milestoneNumber,
+        since,
+        states,
+        viewerSubscribed
+      ];
+  @override
+  Map<String, dynamic> toJson() => _$IssueFiltersToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetIssue$Query$Repository$Issue$Author extends JsonSerializable
     with EquatableMixin {
   GetIssue$Query$Repository$Issue$Author();
@@ -324,17 +474,56 @@ class GetIssue$Query$Repository$Issue$Author extends JsonSerializable
           Map<String, dynamic> json) =>
       _$GetIssue$Query$Repository$Issue$AuthorFromJson(json);
 
-  late String login;
-
   late Uri avatarUrl;
+
+  late String login;
 
   late Uri url;
 
   @override
-  List<Object?> get props => [login, avatarUrl, url];
+  List<Object?> get props => [avatarUrl, login, url];
   @override
   Map<String, dynamic> toJson() =>
       _$GetIssue$Query$Repository$Issue$AuthorToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetIssue$Query$Repository$Issue$ReactionGroups$Reactors
+    extends JsonSerializable with EquatableMixin {
+  GetIssue$Query$Repository$Issue$ReactionGroups$Reactors();
+
+  factory GetIssue$Query$Repository$Issue$ReactionGroups$Reactors.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsFromJson(json);
+
+  late int totalCount;
+
+  @override
+  List<Object?> get props => [totalCount];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetIssue$Query$Repository$Issue$ReactionGroups extends JsonSerializable
+    with EquatableMixin {
+  GetIssue$Query$Repository$Issue$ReactionGroups();
+
+  factory GetIssue$Query$Repository$Issue$ReactionGroups.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetIssue$Query$Repository$Issue$ReactionGroupsFromJson(json);
+
+  @JsonKey(unknownEnumValue: ReactionContent.artemisUnknown)
+  late ReactionContent content;
+
+  late GetIssue$Query$Repository$Issue$ReactionGroups$Reactors reactors;
+
+  @override
+  List<Object?> get props => [content, reactors];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetIssue$Query$Repository$Issue$ReactionGroupsToJson(this);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -380,45 +569,6 @@ class GetIssue$Query$Repository$Issue$Labels extends JsonSerializable
 }
 
 @JsonSerializable(explicitToJson: true)
-class GetIssue$Query$Repository$Issue$ReactionGroups$Reactors
-    extends JsonSerializable with EquatableMixin {
-  GetIssue$Query$Repository$Issue$ReactionGroups$Reactors();
-
-  factory GetIssue$Query$Repository$Issue$ReactionGroups$Reactors.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsFromJson(json);
-
-  late int totalCount;
-
-  @override
-  List<Object?> get props => [totalCount];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetIssue$Query$Repository$Issue$ReactionGroups$ReactorsToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetIssue$Query$Repository$Issue$ReactionGroups extends JsonSerializable
-    with EquatableMixin {
-  GetIssue$Query$Repository$Issue$ReactionGroups();
-
-  factory GetIssue$Query$Repository$Issue$ReactionGroups.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetIssue$Query$Repository$Issue$ReactionGroupsFromJson(json);
-
-  @JsonKey(unknownEnumValue: ReactionContent.artemisUnknown)
-  late ReactionContent content;
-
-  late GetIssue$Query$Repository$Issue$ReactionGroups$Reactors reactors;
-
-  @override
-  List<Object?> get props => [content, reactors];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetIssue$Query$Repository$Issue$ReactionGroupsToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
 class GetIssue$Query$Repository$Issue extends JsonSerializable
     with EquatableMixin {
   GetIssue$Query$Repository$Issue();
@@ -444,9 +594,9 @@ class GetIssue$Query$Repository$Issue extends JsonSerializable
 
   late Uri url;
 
-  GetIssue$Query$Repository$Issue$Labels? labels;
-
   List<GetIssue$Query$Repository$Issue$ReactionGroups>? reactionGroups;
+
+  GetIssue$Query$Repository$Issue$Labels? labels;
 
   @override
   List<Object?> get props => [
@@ -459,8 +609,8 @@ class GetIssue$Query$Repository$Issue extends JsonSerializable
         createdAt,
         updatedAt,
         url,
-        labels,
-        reactionGroups
+        reactionGroups,
+        labels
       ];
   @override
   Map<String, dynamic> toJson() =>
@@ -514,6 +664,35 @@ enum ReactionContent {
   thumbsDown,
   @JsonValue('THUMBS_UP')
   thumbsUp,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
+enum OrderDirection {
+  @JsonValue('ASC')
+  asc,
+  @JsonValue('DESC')
+  desc,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
+enum IssueOrderField {
+  @JsonValue('COMMENTS')
+  comments,
+  @JsonValue('CREATED_AT')
+  createdAt,
+  @JsonValue('UPDATED_AT')
+  updatedAt,
+  @JsonValue('ARTEMIS_UNKNOWN')
+  artemisUnknown,
+}
+
+enum IssueState {
+  @JsonValue('CLOSED')
+  closed,
+  @JsonValue('OPEN')
+  open,
   @JsonValue('ARTEMIS_UNKNOWN')
   artemisUnknown,
 }
@@ -702,16 +881,26 @@ class GetCommentsQuery
 
 @JsonSerializable(explicitToJson: true)
 class GetIssuesArguments extends JsonSerializable with EquatableMixin {
-  GetIssuesArguments({required this.last});
+  GetIssuesArguments(
+      {required this.first, this.after, this.order, this.filters, this.states});
 
   @override
   factory GetIssuesArguments.fromJson(Map<String, dynamic> json) =>
       _$GetIssuesArgumentsFromJson(json);
 
-  late int last;
+  late int first;
+
+  final String? after;
+
+  final IssueOrder? order;
+
+  final IssueFilters? filters;
+
+  @JsonKey(unknownEnumValue: IssueState.artemisUnknown)
+  final List<IssueState>? states;
 
   @override
-  List<Object?> get props => [last];
+  List<Object?> get props => [first, after, order, filters, states];
   @override
   Map<String, dynamic> toJson() => _$GetIssuesArgumentsToJson(this);
 }
@@ -723,8 +912,34 @@ final GET_ISSUES_QUERY_DOCUMENT = DocumentNode(definitions: [
       name: NameNode(value: 'getIssues'),
       variableDefinitions: [
         VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'last')),
+            variable: VariableNode(name: NameNode(value: 'first')),
             type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'after')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'String'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'order')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'IssueOrder'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'filters')),
+            type: NamedTypeNode(
+                name: NameNode(value: 'IssueFilters'), isNonNull: false),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'states')),
+            type: ListTypeNode(
+                type: NamedTypeNode(
+                    name: NameNode(value: 'IssueState'), isNonNull: true),
+                isNonNull: false),
             defaultValue: DefaultValueNode(value: null),
             directives: [])
       ],
@@ -748,11 +963,42 @@ final GET_ISSUES_QUERY_DOCUMENT = DocumentNode(definitions: [
                   alias: null,
                   arguments: [
                     ArgumentNode(
-                        name: NameNode(value: 'last'),
-                        value: VariableNode(name: NameNode(value: 'last')))
+                        name: NameNode(value: 'first'),
+                        value: VariableNode(name: NameNode(value: 'first'))),
+                    ArgumentNode(
+                        name: NameNode(value: 'after'),
+                        value: VariableNode(name: NameNode(value: 'after'))),
+                    ArgumentNode(
+                        name: NameNode(value: 'orderBy'),
+                        value: VariableNode(name: NameNode(value: 'order'))),
+                    ArgumentNode(
+                        name: NameNode(value: 'filterBy'),
+                        value: VariableNode(name: NameNode(value: 'filters'))),
+                    ArgumentNode(
+                        name: NameNode(value: 'states'),
+                        value: VariableNode(name: NameNode(value: 'states')))
                   ],
                   directives: [],
                   selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'pageInfo'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'hasNextPage'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'endCursor'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null)
+                        ])),
                     FieldNode(
                         name: NameNode(value: 'nodes'),
                         alias: null,
@@ -772,25 +1018,7 @@ final GET_ISSUES_QUERY_DOCUMENT = DocumentNode(definitions: [
                               directives: [],
                               selectionSet: null),
                           FieldNode(
-                              name: NameNode(value: 'url'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
                               name: NameNode(value: 'title'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'createdAt'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'closed'),
                               alias: null,
                               arguments: [],
                               directives: [],
@@ -819,6 +1047,62 @@ final GET_ISSUES_QUERY_DOCUMENT = DocumentNode(definitions: [
                                     arguments: [],
                                     directives: [],
                                     selectionSet: null)
+                              ])),
+                          FieldNode(
+                              name: NameNode(value: 'body'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'closed'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'createdAt'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'updatedAt'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'url'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'reactionGroups'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'content'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null),
+                                FieldNode(
+                                    name: NameNode(value: 'reactors'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'totalCount'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ]))
                               ])),
                           FieldNode(
                               name: NameNode(value: 'labels'),
@@ -965,13 +1249,13 @@ final GET_ISSUE_QUERY_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: SelectionSetNode(selections: [
                           FieldNode(
-                              name: NameNode(value: 'login'),
+                              name: NameNode(value: 'avatarUrl'),
                               alias: null,
                               arguments: [],
                               directives: [],
                               selectionSet: null),
                           FieldNode(
-                              name: NameNode(value: 'avatarUrl'),
+                              name: NameNode(value: 'login'),
                               alias: null,
                               arguments: [],
                               directives: [],
@@ -1014,6 +1298,32 @@ final GET_ISSUE_QUERY_DOCUMENT = DocumentNode(definitions: [
                         directives: [],
                         selectionSet: null),
                     FieldNode(
+                        name: NameNode(value: 'reactionGroups'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'content'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null),
+                          FieldNode(
+                              name: NameNode(value: 'reactors'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'totalCount'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null)
+                              ]))
+                        ])),
+                    FieldNode(
                         name: NameNode(value: 'labels'),
                         alias: null,
                         arguments: [
@@ -1049,32 +1359,6 @@ final GET_ISSUE_QUERY_DOCUMENT = DocumentNode(definitions: [
                                     selectionSet: null),
                                 FieldNode(
                                     name: NameNode(value: 'color'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null)
-                              ]))
-                        ])),
-                    FieldNode(
-                        name: NameNode(value: 'reactionGroups'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'content'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null),
-                          FieldNode(
-                              name: NameNode(value: 'reactors'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'totalCount'),
                                     alias: null,
                                     arguments: [],
                                     directives: [],
