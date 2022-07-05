@@ -98,8 +98,12 @@ class HotReload extends StatelessWidget {
                       name: 'IssueCard',
                       useCases: [
                         WidgetbookUseCase(
-                          name: 'Default',
-                          builder: (context) => awesomeTestUseCase(context),
+                          name: 'Closed with Labels',
+                          builder: (context) => issueCard1UseCase(context),
+                        ),
+                        WidgetbookUseCase(
+                          name: 'Open',
+                          builder: (context) => issueCard2UseCase(context),
                         ),
                       ],
                       isExpanded: true,
@@ -145,6 +149,7 @@ class HotReload extends StatelessWidget {
           widgets: [],
         ),
       ],
+      scaffoldBuilder: scaffoldBuilder,
     );
   }
 }

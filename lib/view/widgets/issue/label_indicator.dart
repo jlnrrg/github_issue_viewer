@@ -24,6 +24,9 @@ class LabelIndicator extends StatelessWidget {
             : Colors.white;
 
     return Chip(
+      visualDensity: VisualDensity.compact,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      padding: EdgeInsets.zero,
       label: Text(label.name, style: TextStyle(color: textColor)),
       backgroundColor: label.color,
     );
