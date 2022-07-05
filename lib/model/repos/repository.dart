@@ -21,7 +21,7 @@ class FlutterRepository implements IRepository {
 
   @override
   Future<Either<ModelFailure, List<Issue>>> getIssues() async {
-    final query = GetIssuesQuery(variables: GetIssuesArguments(first: 10));
+    final query = GetIssuesQuery(variables: GetIssuesArguments(last: 10));
 
     final result = await apiClient.query(QueryOptions(
       document: query.document,
@@ -33,13 +33,49 @@ class FlutterRepository implements IRepository {
       return left(ModelFailure.unexpected(result.exception.toString()));
     } else {
       final queryResult = GetIssues$Query.fromJson(result.data ?? {});
-      final list = queryResult.repository?.issues.nodes?.map((e) {
-            final dto = IssueDTO.fromJson(e?.toJson() ?? {});
+      try {
+        List<Issue> list = [];
+        for (final entry in queryResult.repository?.issues.nodes ??
+            <GetIssues$Query$Repository$Issues$Nodes>[]) {
+          final json = entry?.toJson();
+          if (json != null) {
+            final dto = IssueDTO.fromJson(json);
             final domain = dto.toDomain();
-            return domain;
-          }).toList() ??
-          [];
-      return right(list);
+            list.add(domain);
+          }
+        }
+        return right(list);
+      } catch (e) {
+        return left(ModelFailure.parsing(e.toString()));
+      }
+    }
+  }
+
+  @override
+  Future<Either<ModelFailure, Issue>> getIssue(int number) async {
+    final query = GetIssueQuery(variables: GetIssueArguments(number: number));
+
+    final result = await apiClient.query(QueryOptions(
+      document: query.document,
+      variables: query.getVariablesMap(),
+    ));
+
+    if (result.hasException) {
+      // Error handling
+      return left(ModelFailure.unexpected(result.exception.toString()));
+    } else {
+      final queryResult = GetIssue$Query.fromJson(result.data ?? {});
+      try {
+        final json = queryResult.repository?.issue?.toJson();
+        if (json == null) {
+          return left(const ModelFailure.jsonNull());
+        }
+        final dto = IssueDTO.fromJson(json);
+        final domain = dto.toDomain();
+        return right(domain);
+      } catch (e) {
+        return left(ModelFailure.parsing(e.toString()));
+      }
     }
   }
 }

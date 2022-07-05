@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:github_issue_viewer/domain/entities/actor.dart';
 import 'package:github_issue_viewer/domain/entities/label.dart';
+import 'package:github_issue_viewer/domain/entities/reaction.dart';
 
 part 'issue.freezed.dart';
 
@@ -17,6 +18,7 @@ class Issue with _$Issue {
     required DateTime updatedAt,
     required Uri url,
     @Default([]) List<Label> labels,
+    @Default([]) List<Reaction> reactions,
   }) = _Issue;
 
   const Issue._();

@@ -1,0 +1,33 @@
+query getIssue($number: Int!) {
+  repository(owner: "flutter", name: "flutter") {
+    issue(number: $number) {
+      id
+      number
+      title
+      author {
+        login
+        avatarUrl
+        url
+      }
+      body
+      closed
+      createdAt
+      updatedAt
+      url
+      labels(first: 10) {
+        nodes {
+          id
+          name
+          description
+          color
+        }
+      }
+      reactionGroups {
+        content
+        reactors {
+          totalCount
+        }
+      }
+    }
+  }
+}

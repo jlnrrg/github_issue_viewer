@@ -10,7 +10,7 @@ class Comment with _$Comment {
     required Actor author,
     required String body,
     required DateTime createdAt,
-    DateTime? updatedAt,
+    required DateTime updatedAt,
   }) = _Comment;
 
   const Comment._();

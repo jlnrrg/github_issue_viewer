@@ -8,6 +8,8 @@ class ModelFailure with _$ModelFailure {
   const factory ModelFailure.unexpected(String msg) = Unexpected;
   const factory ModelFailure.insufficientPermission() = InsufficientPermission;
   const factory ModelFailure.exeptionWasNull() = ExeptionWasNull;
+  const factory ModelFailure.jsonNull() = JsonNull;
+  const factory ModelFailure.parsing(String msg) = Parsing;
 
   const ModelFailure._();
 }

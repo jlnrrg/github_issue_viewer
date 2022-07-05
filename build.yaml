@@ -20,3 +20,6 @@ targets:
             - graphql_type: DateTime
               dart_type: DateTime
               use_custom_parser: true
+            - graphql_type: URI
+              dart_type: Uri
+              use_custom_parser: true

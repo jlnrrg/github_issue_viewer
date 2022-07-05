@@ -1,17 +1,23 @@
-query getIssues($first: Int) {
+query getIssues($last: Int!) {
   repository(owner: "flutter", name: "flutter") {
-    issues(first: $first) {
+    issues(last: $last) {
       nodes {
         id
+        number
+        url
         title
         createdAt
         closed
         author {
+          avatarUrl
           login
+          url
         }
         labels(first: 10) {
           nodes {
+            id
             name
+            description
             color
           }
         }

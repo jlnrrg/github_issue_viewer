@@ -6,8 +6,8 @@ part 'actor.freezed.dart';
 class Actor with _$Actor {
   const factory Actor({
     required String name,
-    Uri? avatarUrl,
-    Uri? url,
+    required Uri avatarUrl,
+    required Uri url,
   }) = _Actor;
 
   const Actor._();

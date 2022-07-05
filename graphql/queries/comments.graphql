@@ -1,0 +1,25 @@
+query getComments($issueNumber: Int!, $first: Int!) {
+  repository(owner: "flutter", name: "flutter") {
+    issue(number: $issueNumber) {
+      comments(first: $first) {
+        nodes {
+          id
+          author {
+            avatarUrl
+            login
+            url
+          }
+          body
+          createdAt
+          updatedAt
+          reactionGroups {
+            content
+            reactors {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_issue_viewer/app/issues/issue_reader/issue_reader_notifier.dart';
+import 'package:github_issue_viewer/app/issues/reader/issue_reader_notifier.dart';
+import 'package:github_issue_viewer/app/issues/reader/issues_reader_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
@@ -16,6 +17,8 @@ class OverviewPage extends ConsumerWidget {
     final appTheme = ref.watch(themeProvider);
     final themeMode = ref.watch(themeModeProvider);
 
+    final issueP = ref.watch(issueProvider(16).notifier);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -26,8 +29,12 @@ class OverviewPage extends ConsumerWidget {
                     context.go(context.namedLocation(MyRouter.routeNameIssue)),
                 child: const Text('To Issue')),
             TextButton(
-                onPressed: () => ref.read(issueProvider.notifier).fetched(),
-                child: const Text('Fetch Data')),
+                onPressed: () => ref.read(issuesProvider.notifier).fetched(),
+                child: const Text('Fetch all Issues')),
+            TextButton(
+                onPressed: () => issueP.fetched(),
+                child: Text(
+                    'Fetch one Issues ${issueP.state.value?.number ?? '?'}')),
             for (ThemeMode tm in [ThemeMode.light, ThemeMode.dark])
               Wrap(
                 children: AppTheme.all

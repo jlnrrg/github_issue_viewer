@@ -22,6 +22,8 @@ mixin _$ModelFailure {
     required TResult Function(String msg) unexpected,
     required TResult Function() insufficientPermission,
     required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$ModelFailure {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$ModelFailure {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +54,8 @@ mixin _$ModelFailure {
     required TResult Function(InsufficientPermission value)
         insufficientPermission,
     required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +64,8 @@ mixin _$ModelFailure {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +74,8 @@ mixin _$ModelFailure {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -127,6 +139,8 @@ class _$Network extends Network {
     required TResult Function(String msg) unexpected,
     required TResult Function() insufficientPermission,
     required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
   }) {
     return network();
   }
@@ -138,6 +152,8 @@ class _$Network extends Network {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
   }) {
     return network?.call();
   }
@@ -149,6 +165,8 @@ class _$Network extends Network {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
     required TResult orElse(),
   }) {
     if (network != null) {
@@ -165,6 +183,8 @@ class _$Network extends Network {
     required TResult Function(InsufficientPermission value)
         insufficientPermission,
     required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
   }) {
     return network(this);
   }
@@ -176,6 +196,8 @@ class _$Network extends Network {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
   }) {
     return network?.call(this);
   }
@@ -187,6 +209,8 @@ class _$Network extends Network {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
     required TResult orElse(),
   }) {
     if (network != null) {
@@ -269,6 +293,8 @@ class _$Unexpected extends Unexpected {
     required TResult Function(String msg) unexpected,
     required TResult Function() insufficientPermission,
     required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
   }) {
     return unexpected(msg);
   }
@@ -280,6 +306,8 @@ class _$Unexpected extends Unexpected {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
   }) {
     return unexpected?.call(msg);
   }
@@ -291,6 +319,8 @@ class _$Unexpected extends Unexpected {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -307,6 +337,8 @@ class _$Unexpected extends Unexpected {
     required TResult Function(InsufficientPermission value)
         insufficientPermission,
     required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
   }) {
     return unexpected(this);
   }
@@ -318,6 +350,8 @@ class _$Unexpected extends Unexpected {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
   }) {
     return unexpected?.call(this);
   }
@@ -329,6 +363,8 @@ class _$Unexpected extends Unexpected {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -394,6 +430,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     required TResult Function(String msg) unexpected,
     required TResult Function() insufficientPermission,
     required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
   }) {
     return insufficientPermission();
   }
@@ -405,6 +443,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
   }) {
     return insufficientPermission?.call();
   }
@@ -416,6 +456,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
     required TResult orElse(),
   }) {
     if (insufficientPermission != null) {
@@ -432,6 +474,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     required TResult Function(InsufficientPermission value)
         insufficientPermission,
     required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
   }) {
     return insufficientPermission(this);
   }
@@ -443,6 +487,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
   }) {
     return insufficientPermission?.call(this);
   }
@@ -454,6 +500,8 @@ class _$InsufficientPermission extends InsufficientPermission {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
     required TResult orElse(),
   }) {
     if (insufficientPermission != null) {
@@ -513,6 +561,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     required TResult Function(String msg) unexpected,
     required TResult Function() insufficientPermission,
     required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
   }) {
     return exeptionWasNull();
   }
@@ -524,6 +574,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
   }) {
     return exeptionWasNull?.call();
   }
@@ -535,6 +587,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     TResult Function(String msg)? unexpected,
     TResult Function()? insufficientPermission,
     TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
     required TResult orElse(),
   }) {
     if (exeptionWasNull != null) {
@@ -551,6 +605,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     required TResult Function(InsufficientPermission value)
         insufficientPermission,
     required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
   }) {
     return exeptionWasNull(this);
   }
@@ -562,6 +618,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
   }) {
     return exeptionWasNull?.call(this);
   }
@@ -573,6 +631,8 @@ class _$ExeptionWasNull extends ExeptionWasNull {
     TResult Function(Unexpected value)? unexpected,
     TResult Function(InsufficientPermission value)? insufficientPermission,
     TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
     required TResult orElse(),
   }) {
     if (exeptionWasNull != null) {
@@ -585,4 +645,290 @@ class _$ExeptionWasNull extends ExeptionWasNull {
 abstract class ExeptionWasNull extends ModelFailure {
   const factory ExeptionWasNull() = _$ExeptionWasNull;
   const ExeptionWasNull._() : super._();
+}
+
+/// @nodoc
+abstract class _$$JsonNullCopyWith<$Res> {
+  factory _$$JsonNullCopyWith(
+          _$JsonNull value, $Res Function(_$JsonNull) then) =
+      __$$JsonNullCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$JsonNullCopyWithImpl<$Res> extends _$ModelFailureCopyWithImpl<$Res>
+    implements _$$JsonNullCopyWith<$Res> {
+  __$$JsonNullCopyWithImpl(_$JsonNull _value, $Res Function(_$JsonNull) _then)
+      : super(_value, (v) => _then(v as _$JsonNull));
+
+  @override
+  _$JsonNull get _value => super._value as _$JsonNull;
+}
+
+/// @nodoc
+
+class _$JsonNull extends JsonNull {
+  const _$JsonNull() : super._();
+
+  @override
+  String toString() {
+    return 'ModelFailure.jsonNull()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$JsonNull);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() network,
+    required TResult Function(String msg) unexpected,
+    required TResult Function() insufficientPermission,
+    required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
+  }) {
+    return jsonNull();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? network,
+    TResult Function(String msg)? unexpected,
+    TResult Function()? insufficientPermission,
+    TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
+  }) {
+    return jsonNull?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? network,
+    TResult Function(String msg)? unexpected,
+    TResult Function()? insufficientPermission,
+    TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
+    required TResult orElse(),
+  }) {
+    if (jsonNull != null) {
+      return jsonNull();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Network value) network,
+    required TResult Function(Unexpected value) unexpected,
+    required TResult Function(InsufficientPermission value)
+        insufficientPermission,
+    required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
+  }) {
+    return jsonNull(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Network value)? network,
+    TResult Function(Unexpected value)? unexpected,
+    TResult Function(InsufficientPermission value)? insufficientPermission,
+    TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
+  }) {
+    return jsonNull?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Network value)? network,
+    TResult Function(Unexpected value)? unexpected,
+    TResult Function(InsufficientPermission value)? insufficientPermission,
+    TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
+    required TResult orElse(),
+  }) {
+    if (jsonNull != null) {
+      return jsonNull(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class JsonNull extends ModelFailure {
+  const factory JsonNull() = _$JsonNull;
+  const JsonNull._() : super._();
+}
+
+/// @nodoc
+abstract class _$$ParsingCopyWith<$Res> {
+  factory _$$ParsingCopyWith(_$Parsing value, $Res Function(_$Parsing) then) =
+      __$$ParsingCopyWithImpl<$Res>;
+  $Res call({String msg});
+}
+
+/// @nodoc
+class __$$ParsingCopyWithImpl<$Res> extends _$ModelFailureCopyWithImpl<$Res>
+    implements _$$ParsingCopyWith<$Res> {
+  __$$ParsingCopyWithImpl(_$Parsing _value, $Res Function(_$Parsing) _then)
+      : super(_value, (v) => _then(v as _$Parsing));
+
+  @override
+  _$Parsing get _value => super._value as _$Parsing;
+
+  @override
+  $Res call({
+    Object? msg = freezed,
+  }) {
+    return _then(_$Parsing(
+      msg == freezed
+          ? _value.msg
+          : msg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$Parsing extends Parsing {
+  const _$Parsing(this.msg) : super._();
+
+  @override
+  final String msg;
+
+  @override
+  String toString() {
+    return 'ModelFailure.parsing(msg: $msg)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$Parsing &&
+            const DeepCollectionEquality().equals(other.msg, msg));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(msg));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ParsingCopyWith<_$Parsing> get copyWith =>
+      __$$ParsingCopyWithImpl<_$Parsing>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() network,
+    required TResult Function(String msg) unexpected,
+    required TResult Function() insufficientPermission,
+    required TResult Function() exeptionWasNull,
+    required TResult Function() jsonNull,
+    required TResult Function(String msg) parsing,
+  }) {
+    return parsing(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? network,
+    TResult Function(String msg)? unexpected,
+    TResult Function()? insufficientPermission,
+    TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
+  }) {
+    return parsing?.call(msg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? network,
+    TResult Function(String msg)? unexpected,
+    TResult Function()? insufficientPermission,
+    TResult Function()? exeptionWasNull,
+    TResult Function()? jsonNull,
+    TResult Function(String msg)? parsing,
+    required TResult orElse(),
+  }) {
+    if (parsing != null) {
+      return parsing(msg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Network value) network,
+    required TResult Function(Unexpected value) unexpected,
+    required TResult Function(InsufficientPermission value)
+        insufficientPermission,
+    required TResult Function(ExeptionWasNull value) exeptionWasNull,
+    required TResult Function(JsonNull value) jsonNull,
+    required TResult Function(Parsing value) parsing,
+  }) {
+    return parsing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Network value)? network,
+    TResult Function(Unexpected value)? unexpected,
+    TResult Function(InsufficientPermission value)? insufficientPermission,
+    TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
+  }) {
+    return parsing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Network value)? network,
+    TResult Function(Unexpected value)? unexpected,
+    TResult Function(InsufficientPermission value)? insufficientPermission,
+    TResult Function(ExeptionWasNull value)? exeptionWasNull,
+    TResult Function(JsonNull value)? jsonNull,
+    TResult Function(Parsing value)? parsing,
+    required TResult orElse(),
+  }) {
+    if (parsing != null) {
+      return parsing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Parsing extends ModelFailure {
+  const factory Parsing(final String msg) = _$Parsing;
+  const Parsing._() : super._();
+
+  String get msg => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$ParsingCopyWith<_$Parsing> get copyWith =>
+      throw _privateConstructorUsedError;
 }
