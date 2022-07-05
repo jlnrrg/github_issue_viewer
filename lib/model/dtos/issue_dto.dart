@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:github_issue_viewer/domain/issue.dart';
+import 'package:github_issue_viewer/domain/entities/issue.dart';
 
 part 'issue_dto.freezed.dart';
 part 'issue_dto.g.dart';

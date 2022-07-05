@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/domain/core/model_failure.dart';
-import 'package:github_issue_viewer/domain/issue.dart';
+import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/model/dtos/issue_dto.dart';
 import 'package:github_issue_viewer/model/interface/i_repository.dart';
 import 'package:github_issue_viewer/model/service/client_api.dart';
