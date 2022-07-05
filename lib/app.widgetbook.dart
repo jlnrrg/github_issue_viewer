@@ -5,25 +5,16 @@
 // **************************************************************************
 
 import 'dart:core';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/app.dart';
-import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
-import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
-import 'package:github_issue_viewer/domain/entities/issue.dart';
-import 'package:github_issue_viewer/domain/entities/label.dart';
-import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
-import 'package:github_issue_viewer/domain/entities/mock/label.dart';
-import 'package:github_issue_viewer/domain/theme.dart';
-import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
+import 'package:github_issue_viewer/view/widgets/issue/issue_card.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
-import 'package:github_issue_viewer/view/widgets/issue_card.dart';
-import 'package:go_router/go_router.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
-  runApp(HotReload());
+  runApp(const HotReload());
 }
 
 class HotReload extends StatelessWidget {
@@ -46,7 +37,7 @@ class HotReload extends StatelessWidget {
         ),
       ],
       devices: [
-        Device(
+        const Device(
           name: 'iPhone 6',
           resolution: Resolution(
             nativeSize: DeviceSize(
@@ -57,7 +48,7 @@ class HotReload extends StatelessWidget {
           ),
           type: DeviceType.mobile,
         ),
-        Device(
+        const Device(
           name: '12.9" iPad Pro',
           resolution: Resolution(
             nativeSize: DeviceSize(
@@ -70,11 +61,11 @@ class HotReload extends StatelessWidget {
         ),
       ],
       frames: [
-        WidgetbookFrame(
+        const WidgetbookFrame(
           name: 'Widgetbook',
           allowsDevices: true,
         ),
-        WidgetbookFrame(
+        const WidgetbookFrame(
           name: 'None',
           allowsDevices: false,
         ),

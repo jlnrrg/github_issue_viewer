@@ -3,8 +3,7 @@ import 'package:github_issue_viewer/constants/constants.dart';
 import 'package:github_issue_viewer/constants/secrets.dart';
 import 'package:graphql/client.dart';
 
-final apiClientProvider =
-    Provider.autoDispose((ref) => APIClient().graphQLClient());
+final apiClientProvider = Provider((ref) => APIClient().graphQLClient());
 
 class APIClient {
   GraphQLClient graphQLClient() {

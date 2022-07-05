@@ -8,8 +8,7 @@ import 'package:github_issue_viewer/model/service/client_api.dart';
 import 'package:github_issue_viewer/model/service/graphql/graphql_api.graphql.dart';
 import 'package:graphql/client.dart';
 
-final AutoDisposeProvider<IRepository> repositoryProvider =
-    Provider.autoDispose<IRepository>((ref) {
+final repositoryProvider = Provider<IRepository>((ref) {
   final GraphQLClient api = ref.watch(apiClientProvider);
   return FlutterRepository(api);
 });

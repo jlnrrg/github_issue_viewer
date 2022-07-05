@@ -3,10 +3,9 @@ import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/model/interface/i_repository.dart';
 import 'package:github_issue_viewer/model/repos/repository.dart';
 
-final issuesProvider =
-    StateNotifierProvider.autoDispose((ref) => IssuesNotifier(
-          ref.watch(repositoryProvider),
-        ));
+final issuesProvider = StateNotifierProvider((ref) => IssuesNotifier(
+      ref.watch(repositoryProvider),
+    ));
 
 class IssuesNotifier extends StateNotifier<AsyncValue<List<Issue>>> {
   IssuesNotifier(this._repository) : super(const AsyncValue.loading());

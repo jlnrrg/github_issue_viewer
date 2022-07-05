@@ -22,6 +22,7 @@ dependencies:
   dartz: ^0.10.1
   widgetbook: ^2.4.1
   widgetbook_annotation: ^2.1.0
+  infinite_scroll_pagination: ^3.2.0
 
 dependency_overrides:
   analyzer: 4.0.0
