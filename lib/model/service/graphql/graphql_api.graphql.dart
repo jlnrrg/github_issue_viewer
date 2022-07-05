@@ -8,6 +8,169 @@ import 'package:gql/ast.dart';
 part 'graphql_api.graphql.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue$Comments$Nodes$Author
+    extends JsonSerializable with EquatableMixin {
+  GetComments$Query$Repository$Issue$Comments$Nodes$Author();
+
+  factory GetComments$Query$Repository$Issue$Comments$Nodes$Author.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$AuthorFromJson(json);
+
+  late Uri avatarUrl;
+
+  late String login;
+
+  late Uri url;
+
+  @override
+  List<Object?> get props => [avatarUrl, login, url];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$AuthorToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors
+    extends JsonSerializable with EquatableMixin {
+  GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors();
+
+  factory GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$ReactorsFromJson(
+          json);
+
+  late int totalCount;
+
+  @override
+  List<Object?> get props => [totalCount];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$ReactorsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups
+    extends JsonSerializable with EquatableMixin {
+  GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups();
+
+  factory GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroupsFromJson(
+          json);
+
+  @JsonKey(unknownEnumValue: ReactionContent.artemisUnknown)
+  late ReactionContent content;
+
+  late GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors
+      reactors;
+
+  @override
+  List<Object?> get props => [content, reactors];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroupsToJson(
+          this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue$Comments$Nodes extends JsonSerializable
+    with EquatableMixin {
+  GetComments$Query$Repository$Issue$Comments$Nodes();
+
+  factory GetComments$Query$Repository$Issue$Comments$Nodes.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$Issue$Comments$NodesFromJson(json);
+
+  late String id;
+
+  GetComments$Query$Repository$Issue$Comments$Nodes$Author? author;
+
+  late String body;
+
+  late DateTime createdAt;
+
+  late DateTime updatedAt;
+
+  List<GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups>?
+      reactionGroups;
+
+  @override
+  List<Object?> get props =>
+      [id, author, body, createdAt, updatedAt, reactionGroups];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$Issue$Comments$NodesToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue$Comments extends JsonSerializable
+    with EquatableMixin {
+  GetComments$Query$Repository$Issue$Comments();
+
+  factory GetComments$Query$Repository$Issue$Comments.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$Issue$CommentsFromJson(json);
+
+  List<GetComments$Query$Repository$Issue$Comments$Nodes?>? nodes;
+
+  @override
+  List<Object?> get props => [nodes];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$Issue$CommentsToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository$Issue extends JsonSerializable
+    with EquatableMixin {
+  GetComments$Query$Repository$Issue();
+
+  factory GetComments$Query$Repository$Issue.fromJson(
+          Map<String, dynamic> json) =>
+      _$GetComments$Query$Repository$IssueFromJson(json);
+
+  late GetComments$Query$Repository$Issue$Comments comments;
+
+  @override
+  List<Object?> get props => [comments];
+  @override
+  Map<String, dynamic> toJson() =>
+      _$GetComments$Query$Repository$IssueToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query$Repository extends JsonSerializable
+    with EquatableMixin {
+  GetComments$Query$Repository();
+
+  factory GetComments$Query$Repository.fromJson(Map<String, dynamic> json) =>
+      _$GetComments$Query$RepositoryFromJson(json);
+
+  GetComments$Query$Repository$Issue? issue;
+
+  @override
+  List<Object?> get props => [issue];
+  @override
+  Map<String, dynamic> toJson() => _$GetComments$Query$RepositoryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetComments$Query extends JsonSerializable with EquatableMixin {
+  GetComments$Query();
+
+  factory GetComments$Query.fromJson(Map<String, dynamic> json) =>
+      _$GetComments$QueryFromJson(json);
+
+  GetComments$Query$Repository? repository;
+
+  @override
+  List<Object?> get props => [repository];
+  @override
+  Map<String, dynamic> toJson() => _$GetComments$QueryToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
 class GetIssues$Query$Repository$Issues$Nodes$Author extends JsonSerializable
     with EquatableMixin {
   GetIssues$Query$Repository$Issues$Nodes$Author();
@@ -334,169 +497,6 @@ class GetIssue$Query extends JsonSerializable with EquatableMixin {
   Map<String, dynamic> toJson() => _$GetIssue$QueryToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue$Comments$Nodes$Author
-    extends JsonSerializable with EquatableMixin {
-  GetComments$Query$Repository$Issue$Comments$Nodes$Author();
-
-  factory GetComments$Query$Repository$Issue$Comments$Nodes$Author.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$AuthorFromJson(json);
-
-  late Uri avatarUrl;
-
-  late String login;
-
-  late Uri url;
-
-  @override
-  List<Object?> get props => [avatarUrl, login, url];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$AuthorToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors
-    extends JsonSerializable with EquatableMixin {
-  GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors();
-
-  factory GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$ReactorsFromJson(
-          json);
-
-  late int totalCount;
-
-  @override
-  List<Object?> get props => [totalCount];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$ReactorsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups
-    extends JsonSerializable with EquatableMixin {
-  GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups();
-
-  factory GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroupsFromJson(
-          json);
-
-  @JsonKey(unknownEnumValue: ReactionContent.artemisUnknown)
-  late ReactionContent content;
-
-  late GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups$Reactors
-      reactors;
-
-  @override
-  List<Object?> get props => [content, reactors];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroupsToJson(
-          this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue$Comments$Nodes extends JsonSerializable
-    with EquatableMixin {
-  GetComments$Query$Repository$Issue$Comments$Nodes();
-
-  factory GetComments$Query$Repository$Issue$Comments$Nodes.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$Issue$Comments$NodesFromJson(json);
-
-  late String id;
-
-  GetComments$Query$Repository$Issue$Comments$Nodes$Author? author;
-
-  late String body;
-
-  late DateTime createdAt;
-
-  late DateTime updatedAt;
-
-  List<GetComments$Query$Repository$Issue$Comments$Nodes$ReactionGroups>?
-      reactionGroups;
-
-  @override
-  List<Object?> get props =>
-      [id, author, body, createdAt, updatedAt, reactionGroups];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$Issue$Comments$NodesToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue$Comments extends JsonSerializable
-    with EquatableMixin {
-  GetComments$Query$Repository$Issue$Comments();
-
-  factory GetComments$Query$Repository$Issue$Comments.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$Issue$CommentsFromJson(json);
-
-  List<GetComments$Query$Repository$Issue$Comments$Nodes?>? nodes;
-
-  @override
-  List<Object?> get props => [nodes];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$Issue$CommentsToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository$Issue extends JsonSerializable
-    with EquatableMixin {
-  GetComments$Query$Repository$Issue();
-
-  factory GetComments$Query$Repository$Issue.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetComments$Query$Repository$IssueFromJson(json);
-
-  late GetComments$Query$Repository$Issue$Comments comments;
-
-  @override
-  List<Object?> get props => [comments];
-  @override
-  Map<String, dynamic> toJson() =>
-      _$GetComments$Query$Repository$IssueToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query$Repository extends JsonSerializable
-    with EquatableMixin {
-  GetComments$Query$Repository();
-
-  factory GetComments$Query$Repository.fromJson(Map<String, dynamic> json) =>
-      _$GetComments$Query$RepositoryFromJson(json);
-
-  GetComments$Query$Repository$Issue? issue;
-
-  @override
-  List<Object?> get props => [issue];
-  @override
-  Map<String, dynamic> toJson() => _$GetComments$Query$RepositoryToJson(this);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetComments$Query extends JsonSerializable with EquatableMixin {
-  GetComments$Query();
-
-  factory GetComments$Query.fromJson(Map<String, dynamic> json) =>
-      _$GetComments$QueryFromJson(json);
-
-  GetComments$Query$Repository? repository;
-
-  @override
-  List<Object?> get props => [repository];
-  @override
-  Map<String, dynamic> toJson() => _$GetComments$QueryToJson(this);
-}
-
 enum ReactionContent {
   @JsonValue('CONFUSED')
   confused,
@@ -516,6 +516,188 @@ enum ReactionContent {
   thumbsUp,
   @JsonValue('ARTEMIS_UNKNOWN')
   artemisUnknown,
+}
+
+@JsonSerializable(explicitToJson: true)
+class GetCommentsArguments extends JsonSerializable with EquatableMixin {
+  GetCommentsArguments({required this.issueNumber, required this.first});
+
+  @override
+  factory GetCommentsArguments.fromJson(Map<String, dynamic> json) =>
+      _$GetCommentsArgumentsFromJson(json);
+
+  late int issueNumber;
+
+  late int first;
+
+  @override
+  List<Object?> get props => [issueNumber, first];
+  @override
+  Map<String, dynamic> toJson() => _$GetCommentsArgumentsToJson(this);
+}
+
+final GET_COMMENTS_QUERY_DOCUMENT_OPERATION_NAME = 'getComments';
+final GET_COMMENTS_QUERY_DOCUMENT = DocumentNode(definitions: [
+  OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'getComments'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'issueNumber')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: []),
+        VariableDefinitionNode(
+            variable: VariableNode(name: NameNode(value: 'first')),
+            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+            defaultValue: DefaultValueNode(value: null),
+            directives: [])
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(selections: [
+        FieldNode(
+            name: NameNode(value: 'repository'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                  name: NameNode(value: 'owner'),
+                  value: StringValueNode(value: 'flutter', isBlock: false)),
+              ArgumentNode(
+                  name: NameNode(value: 'name'),
+                  value: StringValueNode(value: 'flutter', isBlock: false))
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(selections: [
+              FieldNode(
+                  name: NameNode(value: 'issue'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                        name: NameNode(value: 'number'),
+                        value:
+                            VariableNode(name: NameNode(value: 'issueNumber')))
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(selections: [
+                    FieldNode(
+                        name: NameNode(value: 'comments'),
+                        alias: null,
+                        arguments: [
+                          ArgumentNode(
+                              name: NameNode(value: 'first'),
+                              value:
+                                  VariableNode(name: NameNode(value: 'first')))
+                        ],
+                        directives: [],
+                        selectionSet: SelectionSetNode(selections: [
+                          FieldNode(
+                              name: NameNode(value: 'nodes'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: SelectionSetNode(selections: [
+                                FieldNode(
+                                    name: NameNode(value: 'id'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null),
+                                FieldNode(
+                                    name: NameNode(value: 'author'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'avatarUrl'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'login'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'url'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null)
+                                    ])),
+                                FieldNode(
+                                    name: NameNode(value: 'body'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null),
+                                FieldNode(
+                                    name: NameNode(value: 'createdAt'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null),
+                                FieldNode(
+                                    name: NameNode(value: 'updatedAt'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: null),
+                                FieldNode(
+                                    name: NameNode(value: 'reactionGroups'),
+                                    alias: null,
+                                    arguments: [],
+                                    directives: [],
+                                    selectionSet: SelectionSetNode(selections: [
+                                      FieldNode(
+                                          name: NameNode(value: 'content'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet: null),
+                                      FieldNode(
+                                          name: NameNode(value: 'reactors'),
+                                          alias: null,
+                                          arguments: [],
+                                          directives: [],
+                                          selectionSet:
+                                              SelectionSetNode(selections: [
+                                            FieldNode(
+                                                name: NameNode(
+                                                    value: 'totalCount'),
+                                                alias: null,
+                                                arguments: [],
+                                                directives: [],
+                                                selectionSet: null)
+                                          ]))
+                                    ]))
+                              ]))
+                        ]))
+                  ]))
+            ]))
+      ]))
+]);
+
+class GetCommentsQuery
+    extends GraphQLQuery<GetComments$Query, GetCommentsArguments> {
+  GetCommentsQuery({required this.variables});
+
+  @override
+  final DocumentNode document = GET_COMMENTS_QUERY_DOCUMENT;
+
+  @override
+  final String operationName = GET_COMMENTS_QUERY_DOCUMENT_OPERATION_NAME;
+
+  @override
+  final GetCommentsArguments variables;
+
+  @override
+  List<Object?> get props => [document, operationName, variables];
+  @override
+  GetComments$Query parse(Map<String, dynamic> json) =>
+      GetComments$Query.fromJson(json);
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -921,186 +1103,4 @@ class GetIssueQuery extends GraphQLQuery<GetIssue$Query, GetIssueArguments> {
   @override
   GetIssue$Query parse(Map<String, dynamic> json) =>
       GetIssue$Query.fromJson(json);
-}
-
-@JsonSerializable(explicitToJson: true)
-class GetCommentsArguments extends JsonSerializable with EquatableMixin {
-  GetCommentsArguments({required this.issueNumber, required this.first});
-
-  @override
-  factory GetCommentsArguments.fromJson(Map<String, dynamic> json) =>
-      _$GetCommentsArgumentsFromJson(json);
-
-  late int issueNumber;
-
-  late int first;
-
-  @override
-  List<Object?> get props => [issueNumber, first];
-  @override
-  Map<String, dynamic> toJson() => _$GetCommentsArgumentsToJson(this);
-}
-
-final GET_COMMENTS_QUERY_DOCUMENT_OPERATION_NAME = 'getComments';
-final GET_COMMENTS_QUERY_DOCUMENT = DocumentNode(definitions: [
-  OperationDefinitionNode(
-      type: OperationType.query,
-      name: NameNode(value: 'getComments'),
-      variableDefinitions: [
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'issueNumber')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: []),
-        VariableDefinitionNode(
-            variable: VariableNode(name: NameNode(value: 'first')),
-            type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
-            defaultValue: DefaultValueNode(value: null),
-            directives: [])
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-            name: NameNode(value: 'repository'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                  name: NameNode(value: 'owner'),
-                  value: StringValueNode(value: 'flutter', isBlock: false)),
-              ArgumentNode(
-                  name: NameNode(value: 'name'),
-                  value: StringValueNode(value: 'flutter', isBlock: false))
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                  name: NameNode(value: 'issue'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                        name: NameNode(value: 'number'),
-                        value:
-                            VariableNode(name: NameNode(value: 'issueNumber')))
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                        name: NameNode(value: 'comments'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                              name: NameNode(value: 'first'),
-                              value:
-                                  VariableNode(name: NameNode(value: 'first')))
-                        ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(selections: [
-                          FieldNode(
-                              name: NameNode(value: 'nodes'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: SelectionSetNode(selections: [
-                                FieldNode(
-                                    name: NameNode(value: 'id'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'author'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'avatarUrl'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'login'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'url'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null)
-                                    ])),
-                                FieldNode(
-                                    name: NameNode(value: 'body'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'createdAt'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'updatedAt'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: null),
-                                FieldNode(
-                                    name: NameNode(value: 'reactionGroups'),
-                                    alias: null,
-                                    arguments: [],
-                                    directives: [],
-                                    selectionSet: SelectionSetNode(selections: [
-                                      FieldNode(
-                                          name: NameNode(value: 'content'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet: null),
-                                      FieldNode(
-                                          name: NameNode(value: 'reactors'),
-                                          alias: null,
-                                          arguments: [],
-                                          directives: [],
-                                          selectionSet:
-                                              SelectionSetNode(selections: [
-                                            FieldNode(
-                                                name: NameNode(
-                                                    value: 'totalCount'),
-                                                alias: null,
-                                                arguments: [],
-                                                directives: [],
-                                                selectionSet: null)
-                                          ]))
-                                    ]))
-                              ]))
-                        ]))
-                  ]))
-            ]))
-      ]))
-]);
-
-class GetCommentsQuery
-    extends GraphQLQuery<GetComments$Query, GetCommentsArguments> {
-  GetCommentsQuery({required this.variables});
-
-  @override
-  final DocumentNode document = GET_COMMENTS_QUERY_DOCUMENT;
-
-  @override
-  final String operationName = GET_COMMENTS_QUERY_DOCUMENT_OPERATION_NAME;
-
-  @override
-  final GetCommentsArguments variables;
-
-  @override
-  List<Object?> get props => [document, operationName, variables];
-  @override
-  GetComments$Query parse(Map<String, dynamic> json) =>
-      GetComments$Query.fromJson(json);
 }

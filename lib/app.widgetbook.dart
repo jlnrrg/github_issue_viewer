@@ -1,0 +1,116 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// **************************************************************************
+// WidgetbookGenerator
+// **************************************************************************
+
+import 'dart:core';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_issue_viewer/app.dart';
+import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
+import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
+import 'package:github_issue_viewer/domain/entities/issue.dart';
+import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
+import 'package:github_issue_viewer/domain/theme.dart';
+import 'package:github_issue_viewer/view/router/router.dart';
+import 'package:github_issue_viewer/view/widgets/issue_card.dart';
+import 'package:widgetbook/widgetbook.dart';
+
+void main() {
+  runApp(HotReload());
+}
+
+class HotReload extends StatelessWidget {
+  const HotReload({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Widgetbook.material(
+      appInfo: AppInfo(
+        name: 'Meal App',
+      ),
+      themes: [
+        WidgetbookTheme(
+          name: 'Light',
+          data: getLightTheme(),
+        ),
+        WidgetbookTheme(
+          name: 'Dark',
+          data: getDarkTheme(),
+        ),
+      ],
+      devices: [
+        Device(
+          name: 'iPhone 6',
+          resolution: Resolution(
+            nativeSize: DeviceSize(
+              height: 1334.0,
+              width: 750.0,
+            ),
+            scaleFactor: 2.0,
+          ),
+          type: DeviceType.mobile,
+        ),
+        Device(
+          name: '12.9" iPad Pro',
+          resolution: Resolution(
+            nativeSize: DeviceSize(
+              height: 2732.0,
+              width: 2048.0,
+            ),
+            scaleFactor: 2.0,
+          ),
+          type: DeviceType.tablet,
+        ),
+      ],
+      frames: [
+        WidgetbookFrame(
+          name: 'Widgetbook',
+          allowsDevices: true,
+        ),
+        WidgetbookFrame(
+          name: 'None',
+          allowsDevices: false,
+        ),
+      ],
+      textScaleFactors: [
+        1.0,
+        2.0,
+        3.0,
+      ],
+      categories: [
+        WidgetbookCategory(
+          name: 'use cases',
+          folders: [
+            WidgetbookFolder(
+              name: 'view',
+              widgets: [],
+              folders: [
+                WidgetbookFolder(
+                  name: 'widgets',
+                  widgets: [
+                    WidgetbookComponent(
+                      name: 'IssueCard',
+                      useCases: [
+                        WidgetbookUseCase(
+                          name: 'Default',
+                          builder: (context) => awesomeTestUseCase(context),
+                        ),
+                      ],
+                      isExpanded: true,
+                    ),
+                  ],
+                  folders: [],
+                  isExpanded: true,
+                ),
+              ],
+              isExpanded: true,
+            ),
+          ],
+          widgets: [],
+        ),
+      ],
+    );
+  }
+}

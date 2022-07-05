@@ -26,7 +26,7 @@
   - [ ] unit test
   - [ ] widget test
   - [ ] unit test
-- [ ] Make use of the GitHub’s GraphQL API
+- [x] Make use of the GitHub’s GraphQL API
 - [ ] Publish your solution at GitHub
 - [ ] Build a CI on GitHub Actions for your preferred OS (Android or iOS)
 - [ ] Deploy app to Firebase App Distribution
