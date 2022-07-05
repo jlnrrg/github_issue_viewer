@@ -11,10 +11,13 @@ import 'package:github_issue_viewer/app.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
+import 'package:github_issue_viewer/domain/entities/label.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
+import 'package:github_issue_viewer/domain/entities/mock/label.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
 import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
+import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue_card.dart';
 import 'package:widgetbook/widgetbook.dart';
 
@@ -113,6 +116,17 @@ class HotReload extends StatelessWidget {
                               name: 'Default',
                               builder: (context) =>
                                   closedIndicatorUseCase(context),
+                            ),
+                          ],
+                          isExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'LabelIndicator',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  labelIndicatorUseCase(context),
                             ),
                           ],
                           isExpanded: true,
