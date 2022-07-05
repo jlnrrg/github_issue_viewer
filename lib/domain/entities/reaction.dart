@@ -15,4 +15,28 @@ class Reaction with _$Reaction {
   const factory Reaction.unknown(int amount) = _Unknown;
 
   const Reaction._();
+
+  String toEmoji() => when(
+      confused: (_) => '😕',
+      eyes: (_) => '👀',
+      heart: (_) => '❤️',
+      hooray: (_) => '🎉',
+      laugh: (_) => '😄',
+      rocket: (_) => '🚀',
+      thumbsDown: (_) => '👍',
+      thumbsUp: (_) => '👎',
+      unknown: (_) => '');
+
+  @override
+  String toString() => when(
+        confused: (_) => 'confused',
+        eyes: (_) => 'eyes',
+        heart: (_) => 'heart',
+        hooray: (_) => 'hooray',
+        laugh: (_) => 'laugh',
+        rocket: (_) => 'rocket',
+        thumbsDown: (_) => 'thumbs down',
+        thumbsUp: (_) => 'thumbs up',
+        unknown: (_) => 'unknown',
+      );
 }

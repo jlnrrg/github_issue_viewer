@@ -5,21 +5,27 @@
 // **************************************************************************
 
 import 'dart:core';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/app.dart';
+import 'package:github_issue_viewer/app/issues/seen/seen_issues_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/domain/entities/label.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
 import 'package:github_issue_viewer/domain/entities/mock/label.dart';
+import 'package:github_issue_viewer/domain/entities/mock/reaction.dart';
+import 'package:github_issue_viewer/domain/entities/reaction.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
-import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
+import 'package:github_issue_viewer/view/widgets/issue/closed_indicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/issue_card.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
+import 'package:github_issue_viewer/view/widgets/issue/reaction_indicator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:widgetbook/widgetbook.dart';
 
 void main() {
@@ -120,6 +126,17 @@ class HotReload extends StatelessWidget {
                               name: 'Default',
                               builder: (context) =>
                                   closedIndicatorUseCase(context),
+                            ),
+                          ],
+                          isExpanded: true,
+                        ),
+                        WidgetbookComponent(
+                          name: 'ReactionIndicator',
+                          useCases: [
+                            WidgetbookUseCase(
+                              name: 'Default',
+                              builder: (context) =>
+                                  reactionIndicatorUseCase(context),
                             ),
                           ],
                           isExpanded: true,

@@ -10,7 +10,9 @@ final issueProvider =
 
 class IssueNotifier extends StateNotifier<AsyncValue<Issue>> {
   IssueNotifier(this._repository, this.number)
-      : super(const AsyncValue.loading());
+      : super(const AsyncValue.loading()) {
+    fetched();
+  }
 
   final IRepository _repository;
   final int number;

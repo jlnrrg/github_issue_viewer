@@ -1,10 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_issue_viewer/app/issues/seen/seen_issues_notifier.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
 import 'package:github_issue_viewer/domain/entities/mock/issue.dart';
 import 'package:github_issue_viewer/domain/theme.dart';
 import 'package:github_issue_viewer/view/router/router.dart';
-import 'package:github_issue_viewer/view/widgets/issue/closed_inicator.dart';
+import 'package:github_issue_viewer/view/widgets/issue/closed_indicator.dart';
 import 'package:github_issue_viewer/view/widgets/issue/label_indicator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +22,7 @@ Widget issueCard2UseCase(BuildContext context) => IssueCard(
       issue: mockIssue2,
     );
 
-class IssueCard extends StatelessWidget {
+class IssueCard extends ConsumerWidget {
   const IssueCard({Key? key, required this.issue}) : super(key: key);
 
   final Issue issue;
@@ -32,22 +34,27 @@ class IssueCard extends StatelessWidget {
   bool get hasOverlay => issue.labels.isNotEmpty || issue.closed;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final dateFormat = DateFormat('d.M.y HH:mm');
+
+    final seenIssueList = ref.watch(seenIssuesProvider);
 
     return Hero(
         tag: issue.number,
         child: Material(
             color: Colors.transparent,
             child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
-                child: InkWell(
+              constraints: const BoxConstraints(maxWidth: 600),
+              child: InkWell(
                   borderRadius: borderRadius,
                   onTap: () => GoRouter.of(context).pushNamed(
                       MyRouter.routeNameIssue,
                       params: {'n': issue.number.toString()}),
                   child: Card(
                     elevation: 0,
+                    color: seenIssueList.contains(issue.number)
+                        ? Theme.of(context).chipTheme.disabledColor
+                        : null,
                     shape: RoundedRectangleBorder(
                       borderRadius: borderRadius,
                       side: BorderSide(
@@ -124,22 +131,7 @@ class IssueCard extends StatelessWidget {
                           ),
                       ],
                     ),
-                  ),
-                )
-
-                // Positioned(
-                //   bottom: 0,
-                //   right: 0,
-                //   child: Wrap(
-                //     alignment: WrapAlignment.end,
-                //     // mainAxisAlignment: MainAxisAlignment.end,
-                //     runSpacing: 4,
-                //     spacing: 4,
-                //     children: issue.labels
-                //         .map((e) => LabelIndicator(label: e))
-                //         .toList(),
-                //   ),
-                // ),
-                )));
+                  )),
+            )));
   }
 }

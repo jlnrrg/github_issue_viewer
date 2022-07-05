@@ -58,7 +58,10 @@ class IssueDTO with _$IssueDTO {
       createdAt: createdAt,
       updatedAt: updatedAt,
       url: url,
-      reactions: reactionGroups.map((e) => e.toDomain()).toList(),
+      reactions: reactionGroups
+          .map((e) => e.toDomain())
+          .where((element) => element.amount > 0)
+          .toList(),
       labels: labels.map((e) => e.toDomain()).toList(),
     );
   }

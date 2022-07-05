@@ -172,11 +172,6 @@ class _$_Confused extends _Confused {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.confused(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -349,11 +344,6 @@ class _$_Eyes extends _Eyes {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.eyes(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -523,11 +513,6 @@ class _$_Heart extends _Heart {
 
   @override
   final int amount;
-
-  @override
-  String toString() {
-    return 'Reaction.heart(amount: $amount)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -702,11 +687,6 @@ class _$_Hooray extends _Hooray {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.hooray(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -879,11 +859,6 @@ class _$_Laugh extends _Laugh {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.laugh(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -1054,11 +1029,6 @@ class _$_Rocket extends _Rocket {
 
   @override
   final int amount;
-
-  @override
-  String toString() {
-    return 'Reaction.rocket(amount: $amount)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -1235,11 +1205,6 @@ class _$_ThumbsDown extends _ThumbsDown {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.thumbsDown(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -1414,11 +1379,6 @@ class _$_ThumbsUp extends _ThumbsUp {
   final int amount;
 
   @override
-  String toString() {
-    return 'Reaction.thumbsUp(amount: $amount)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
@@ -1590,11 +1550,6 @@ class _$_Unknown extends _Unknown {
 
   @override
   final int amount;
-
-  @override
-  String toString() {
-    return 'Reaction.unknown(amount: $amount)';
-  }
 
   @override
   bool operator ==(dynamic other) {

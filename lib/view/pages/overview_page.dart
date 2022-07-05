@@ -137,10 +137,16 @@ class _InfiniteIssueListState extends ConsumerState<_InfiniteIssueList> {
               ref.read(issuesProvider.notifier).reset();
               _pagingController.refresh();
             }),
-        child: PagedListView(
+        child: PagedListView.separated(
           pagingController: _pagingController,
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 8,
+          ),
           builderDelegate: PagedChildBuilderDelegate<Issue>(
-            itemBuilder: (context, item, index) => IssueCard(issue: item),
+            itemBuilder: (context, item, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: IssueCard(issue: item),
+            ),
           ),
         ));
   }

@@ -2,18 +2,18 @@
 
 
 ## User Story
-- [ ] see a list of all issues of a Flutter GitHub repository (https://github.com/flutter/flutter)
-- [ ] be able to navigate to a detail screen of an issue that features relevant information
-- [ ] see the already visited issues distinguished at the list of all issues
+- [x] see a list of all issues of a Flutter GitHub repository (https://github.com/flutter/flutter)
+- [x] be able to navigate to a detail screen of an issue that features relevant information
+- [x] see the already visited issues distinguished at the list of all issues
 - [x] be able to switch between dark and light modes
 - [ ] be able to sort and filter the list of issues
 
 ## Acceptance criteria
 - Issues list page
-  - [ ] Pagination with an infinitely scrolling list
+  - [x] Pagination with an infinitely scrolling list
   - [ ] Filtering and sorting issues
-  - [ ] Tapping on an issue should navigate to the detail page
-  - [ ] Visited issues are distinguished from others
+  - [x] Tapping on an issue should navigate to the detail page
+  - [x] Visited issues are distinguished from others
 - Issue detail page
   - [ ] Display title, author, description, creation date and other relevant information in a readable manner
 - Other
@@ -27,6 +27,6 @@
   - [ ] widget test
   - [ ] unit test
 - [x] Make use of the GitHub’s GraphQL API
-- [ ] Publish your solution at GitHub
+- [x] Publish your solution at GitHub
 - [ ] Build a CI on GitHub Actions for your preferred OS (Android or iOS)
 - [ ] Deploy app to Firebase App Distribution
