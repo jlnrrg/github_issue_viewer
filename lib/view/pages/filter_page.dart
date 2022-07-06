@@ -110,6 +110,7 @@ class _FiltersSelection extends ConsumerWidget {
                   : dateFormat.format(state.since!))),
           const Text('Issue closed or open:'),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ChoiceChip(
                 label: const Text('Closed'),

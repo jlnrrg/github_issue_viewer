@@ -34,6 +34,13 @@ jobs:
         run: echo $SECRETS_DART > secrets.dart
         working-directory: lib/constants
 
+      - name: Decode google-services.json
+        if: ${{ !env.ACT }}
+        env:
+          FIREBASE_SECRET: ${{ secrets.FIREBASE_SECRET }}
+        run: echo $FIREBASE_SECRET > google-services.json
+        working-directory: ./android/app
+
       #  too many info warnings in the code rn
       # - name: Analyze dart code for errors
       #   run: flutter analyze .
