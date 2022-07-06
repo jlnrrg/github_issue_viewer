@@ -1,132 +1,90 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_issue_viewer/app/issues/reader/issue_reader_notifier.dart';
 import 'package:github_issue_viewer/app/issues/reader/issues_reader_notifier.dart';
 import 'package:github_issue_viewer/app/theme/theme_mode_notifier.dart';
-import 'package:github_issue_viewer/app/theme/theme_notifier.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
-import 'package:github_issue_viewer/view/router/router.dart';
+import 'package:github_issue_viewer/domain/theme.dart';
+import 'package:github_issue_viewer/view/pages/filter_page.dart';
 import 'package:github_issue_viewer/view/widgets/issue/issue_card.dart';
-import 'package:go_router/go_router.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class OverviewPage extends ConsumerWidget {
-  OverviewPage({Key? key}) : super(key: key);
-
-  final p = issueProvider(16);
+class OverviewPage extends ConsumerStatefulWidget {
+  const OverviewPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, ref) {
-    final appTheme = ref.watch(themeProvider);
-    final themeMode = ref.watch(themeModeProvider);
-
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'filterFAB',
-        child: const Icon(Icons.filter_alt),
-        onPressed: () =>
-            GoRouter.of(context).pushNamed(MyRouter.routeNameFilter),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: const _InfiniteIssueList(),
-
-      // SingleChildScrollView(
-      //   child: Column(
-      //     children: [
-      //       const Text('Overview'),
-      //       TextButton(
-      //           onPressed: () => context
-      //               .pushNamed(MyRouter.routeNameIssue, params: {'n': '1'}),
-      //           child: const Text('To Issue')),
-      //       TextButton(
-      //           onPressed: () => ref.read(p.notifier).fetched(),
-      //           child: Text(
-      //               'Fetch one Issues ${ref.watch(p).value?.number ?? '?'}')),
-
-      //       // for (ThemeMode tm in [ThemeMode.light, ThemeMode.dark])
-      //       //   Wrap(
-      //       //     children: AppTheme.all
-      //       //         .map(
-      //       //           (theme) => IntrinsicWidth(
-      //       //             child: FlexThemeModeOptionButton(
-      //       //                 backgroundColor: tm == ThemeMode.dark
-      //       //                     ? Colors.grey[850]
-      //       //                     : Colors.white,
-      //       //                 flexSchemeColor: tm == ThemeMode.dark
-      //       //                     ? theme.toFlexSchemeData().dark
-      //       //                     : theme.toFlexSchemeData().light,
-      //       //                 selected: theme == appTheme && tm == themeMode,
-      //       //                 onSelect: () {
-      //       //                   ref.read(themeProvider.notifier).changed(theme);
-      //       //                   ref.read(themeModeProvider.notifier).changed(tm);
-      //       //                 }),
-      //       //           ),
-      //       //         )
-      //       //         .toList(),
-      //       //   ),
-      //       // FlexThemeModeSwitch(
-      //       //     themeMode: themeMode,
-      //       //     onThemeModeChanged: (m) =>
-      //       //         ref.read(themeModeProvider.notifier).changed(m),
-      //       //     flexSchemeData: const AppTheme.aquaBlue().toFlexSchemeData())
-      //     ],
-      //   ),
-      // ),
-    );
-  }
+  _OverviewPageState createState() => _OverviewPageState();
 }
 
-class _InfiniteIssueList extends ConsumerStatefulWidget {
-  const _InfiniteIssueList({Key? key}) : super(key: key);
-
-  @override
-  _InfiniteIssueListState createState() => _InfiniteIssueListState();
-}
-
-class _InfiniteIssueListState extends ConsumerState<_InfiniteIssueList> {
-  static const _pageSize = 20;
+class _OverviewPageState extends ConsumerState<OverviewPage> {
+  static const _pageSize = 10;
   int pageKey = 0;
+
+  //? the initialScrollOffset does not work here, as the data has to be fetched first to create enough scrolling area
+  final _scrollController = ScrollController();
 
   final PagingController<int, Issue> _pagingController =
       PagingController(firstPageKey: 0);
 
   @override
   void initState() {
-    ref.read(issuesProvider.notifier).addListener((state) {
-      if (state.hasValue) {
-        final listSize = (state.value?.length ?? 0);
-        final nextPageKey = pageKey + listSize;
-        if (listSize < _pageSize) {
-          _pagingController.appendLastPage(state.value ?? []);
-        } else {
-          _pagingController.appendPage(state.value ?? [], nextPageKey);
-        }
-      } else if (state.hasError) {
-        _pagingController.error = state.error;
-      }
+    // on [issuesProvi] changes update [_pagingController]'s values
+    // ref.watch(issuesProvider.notifier).addListener((state) {
+    //   if (state.hasValue) {
+    //     final listSize = (state.value?.length ?? 0);
+    //     final nextPageKey = pageKey + listSize;
+    //     if (listSize < _pageSize) {
+    //       _pagingController.appendLastPage(state.value ?? []);
+    //     } else {
+    //       _pagingController.appendPage(state.value ?? [], nextPageKey);
+    //     }
+    //   } else if (state.hasError) {
+    //     _pagingController.error = state.error;
+    //   }
+    // });
+
+    // // subscribe to [filtersProvider] changes
+    // ref.read(filtersProvider.notifier).addListener((state) {
+    //   reset();
+    // });
+
+    // // subscribe to [orderProvider] changes
+    // ref.read(orderProvider.notifier).addListener((state) {
+    //   reset();
+    // });
+    _pagingController.addPageRequestListener((pageKey) {
+      _fetch(pageKey);
     });
 
-    _pagingController.addPageRequestListener((pageKey) {
-      ref.read(issuesProvider.notifier).fetchedNext(_pageSize);
-    });
     super.initState();
   }
 
-  // Future<void> _fetch(int pageKey) async {
-  //   await ref.read(issuesProvider.notifier).fetchedNext(_pageSize);
-  //   final state = ref.read(issuesProvider);
-  //   if (state.hasValue) {
-  //     final listSize = (state.value?.length ?? 0);
-  //     final nextPageKey = pageKey + listSize;
-  //     if (listSize < _pageSize) {
-  //       _pagingController.appendLastPage(state.value ?? []);
-  //     } else {
-  //       _pagingController.appendPage(state.value ?? [], nextPageKey);
-  //     }
-  //   } else if (state.hasError) {
-  //     _pagingController.error = state.error;
-  //   }
-  // }
+  void reset() {
+    ref.read(issuesProvider.notifier).reset();
+    _pagingController.refresh();
+  }
+
+  Future<void> _fetch(int pageKey) async {
+    await ref.read(issuesProvider.notifier).fetchedNext(_pageSize);
+    final state = ref.read(issuesProvider);
+    if (state.hasValue) {
+      final listSize = (state.value?.length ?? 0);
+      final nextPageKey = pageKey + listSize;
+      if (listSize < _pageSize) {
+        _pagingController.appendLastPage(state.value ?? []);
+      } else {
+        _pagingController.appendPage(state.value ?? [], nextPageKey);
+      }
+    } else if (state.hasError) {
+      _pagingController.error = state.error;
+    }
+
+    // on the first fetch, scroll downwards to hide the themeMode Selector
+    if (pageKey == 0) {
+      _scrollController.animateTo(100,
+          duration: const Duration(milliseconds: 50), curve: Curves.easeIn);
+    }
+  }
 
   @override
   void dispose() {
@@ -136,22 +94,62 @@ class _InfiniteIssueListState extends ConsumerState<_InfiniteIssueList> {
 
   @override
   Widget build(BuildContext context) {
-    return RefreshIndicator(
-        onRefresh: () => Future.sync(() {
-              ref.read(issuesProvider.notifier).reset();
-              _pagingController.refresh();
-            }),
-        child: PagedListView.separated(
-          pagingController: _pagingController,
-          separatorBuilder: (context, index) => const SizedBox(
-            height: 8,
-          ),
-          builderDelegate: PagedChildBuilderDelegate<Issue>(
-            itemBuilder: (context, item, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: IssueCard(issue: item),
-            ),
-          ),
-        ));
+    return SafeArea(
+        child: Scaffold(
+            floatingActionButton: FloatingActionButton(
+                heroTag: 'filterFAB',
+                child: const Icon(Icons.filter_alt),
+                onPressed: () async {
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FilterPage()));
+                  reset();
+
+                  //? the await does not seem to work with go_router, thus using the default Navigator
+                  // GoRouter.of(context).pushNamed(MyRouter.routeNameFilter),
+                }),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerFloat,
+            body: RefreshIndicator(
+                onRefresh: () => Future.sync(() => reset()),
+                child:
+                    CustomScrollView(controller: _scrollController, slivers: [
+                  SliverToBoxAdapter(
+                      child: Consumer(builder: (context, ref2, _) {
+                    final themeMode = ref2.watch(themeModeProvider);
+                    return Container(
+                      height: 90,
+                      padding: const EdgeInsets.all(12.0),
+                      child: FlexThemeModeSwitch(
+                          height: 12,
+                          width: 12,
+                          themeMode: themeMode,
+                          onThemeModeChanged: (m) =>
+                              ref.read(themeModeProvider.notifier).changed(m),
+                          flexSchemeData:
+                              const AppTheme.aquaBlue().toFlexSchemeData()),
+                    );
+                  })),
+                  const SliverToBoxAdapter(
+                    child: Divider(
+                      height: 2,
+                      thickness: 2,
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.all(8),
+                    sliver: PagedSliverList.separated(
+                      pagingController: _pagingController,
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 8,
+                      ),
+                      builderDelegate: PagedChildBuilderDelegate<Issue>(
+                        itemBuilder: (context, item, index) =>
+                            IssueCard(issue: item),
+                      ),
+                    ),
+                  )
+                ]))));
   }
 }

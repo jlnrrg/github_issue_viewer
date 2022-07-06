@@ -1,7 +1,11 @@
-import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz.dart' hide Order;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_issue_viewer/domain/core/model_failure.dart';
 import 'package:github_issue_viewer/domain/entities/issue.dart';
+import 'package:github_issue_viewer/domain/filters.dart';
+import 'package:github_issue_viewer/domain/order.dart';
+import 'package:github_issue_viewer/model/core/issueFilters_extension.dart';
+import 'package:github_issue_viewer/model/core/issueOrder_extension.dart';
 import 'package:github_issue_viewer/model/dtos/issue_dto.dart';
 import 'package:github_issue_viewer/model/interface/i_repository.dart';
 import 'package:github_issue_viewer/model/service/client_api.dart';
@@ -27,9 +31,14 @@ class FlutterRepository implements IRepository {
 
   @override
   Future<Either<ModelFailure, List<Issue>>> getPaginationNext(
-      int amount) async {
+      {int amount = 10, Order? order, Filters? filters}) async {
     final query = GetIssuesQuery(
-        variables: GetIssuesArguments(first: amount, after: cursor));
+        variables: GetIssuesArguments(
+            first: amount,
+            after: cursor,
+            order: order == null ? null : IssueOrderX.fromDomain(order),
+            filters:
+                filters == null ? null : IssueFiltersX.fromDomain(filters)));
 
     final result = await apiClient.query(QueryOptions(
       document: query.document,

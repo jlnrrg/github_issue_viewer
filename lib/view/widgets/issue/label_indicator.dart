@@ -7,8 +7,8 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart';
 @WidgetbookUseCase(name: 'Default', type: LabelIndicator)
 Widget labelIndicatorUseCase(BuildContext context) => LabelIndicator(
         label: context.knobs.options(label: 'Labels', options: [
-      Option(label: 'a: build', value: mockLabel),
-      Option(label: 'a: video', value: mockLabel2)
+      const Option(label: 'a: build', value: mockLabel),
+      const Option(label: 'a: video', value: mockLabel2)
     ]));
 
 class LabelIndicator extends StatelessWidget {
@@ -20,7 +20,7 @@ class LabelIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final textColor =
         ThemeData.estimateBrightnessForColor(label.color) == Brightness.light
-            ? null
+            ? Colors.black
             : Colors.white;
 
     return Chip(

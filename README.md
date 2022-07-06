@@ -6,12 +6,12 @@
 - [x] be able to navigate to a detail screen of an issue that features relevant information
 - [x] see the already visited issues distinguished at the list of all issues
 - [x] be able to switch between dark and light modes
-- [ ] be able to sort and filter the list of issues
+- [x] be able to sort and filter the list of issues
 
 ## Acceptance criteria
 - Issues list page
   - [x] Pagination with an infinitely scrolling list
-  - [ ] Filtering and sorting issues
+  - [x] Filtering and sorting issues
   - [x] Tapping on an issue should navigate to the detail page
   - [x] Visited issues are distinguished from others
 - Issue detail page

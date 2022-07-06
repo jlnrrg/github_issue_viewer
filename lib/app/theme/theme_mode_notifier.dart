@@ -34,6 +34,7 @@ class ThemeModeNotifier extends StateNotifier<ThemeMode> {
 
   void changed(ThemeMode theme) {
     state = theme;
+    saved();
   }
 
   Future<void> saved() async {
